@@ -3,9 +3,12 @@ import dotenv from "dotenv"
 import cors from "cors"
 
 dotenv.config({path:"./api/.env"})
-const app = express()
+export const app = express()
 
 app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
 app.get("/api/test", (req, res) => {
     res.json({body: "hello world" + Date.now()})
 })
@@ -16,4 +19,3 @@ if (PORT) {
     app.listen(PORT, console.log(`escuchando en puerto ${PORT}`))
 }
 
-export default { app }
