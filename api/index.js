@@ -13,7 +13,7 @@ app.get("/api/test", (req, res) => {
     res.json({body: "hello world" + Date.now()})
 })
 
-const PORT = process.env.API_PORT
+const PORT = process.env.API_PORT || "https://deploy-test-two-rho.vercel.app"
 
 if (PORT) {
     app.listen(PORT, console.log(`escuchando en puerto ${PORT}`))
