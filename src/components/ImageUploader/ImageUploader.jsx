@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import axios from "axios"
 import "./ImageUploader.css"
 
@@ -11,7 +11,7 @@ function ImageUploader() {
       formData.append('image', selectedImage);
   
       try {
-        const res = await axios.post('https://deploy-test-two-rho.vercel.app/upload', formData, {
+        const res = await axios.post('http://localhost:4000/upload', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
