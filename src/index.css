@@ -37,15 +37,13 @@ h1, h2 {
   font-size: 1.125em;
   line-height: 1.688em;
   font-weight: 500;
-}
-
-h2 {
   color: #4F4F4F;
 }
 
 p {
   font-size: 0.625em;
   line-height: 0.938em;
+  color: #828282
 }
 
 button {
