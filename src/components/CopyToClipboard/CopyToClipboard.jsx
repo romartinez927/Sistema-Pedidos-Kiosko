@@ -13,7 +13,7 @@ const copyToClipboard = () => {
 }
   return (
     <div className='d-flex align-items-center justify-content-between copy-container mx-auto mt-3'>
-        <p className='my-auto px-2'>{text}</p>
+        <p className='my-auto px-1'>{text}</p>
         <input
         ref={textRef}
         type="text"
