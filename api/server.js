@@ -31,7 +31,7 @@ app.post('/upload', upload.single('image'), (req, res) => {
     }
   
     // Enviar la respuesta con la URL de la imagen cargada
-    res.json({ imageUrl: `http://localhost:5173/uploads/${req.file.filename}` });
+    res.json({ imageUrl: `https://deploy-test-two-rho.vercel.app/uploads/${req.file.filename}` });
   });
 
 const PORT = 4000 || "https://deploy-test-two-rho.vercel.app"
