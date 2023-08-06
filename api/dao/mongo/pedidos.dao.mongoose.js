@@ -6,7 +6,7 @@ const pedidosCollection = 'pedidos'
 
 const pedidoSchema = new Schema({
   products: { type: Array, default: [], ref: "products" },
-  estado: { type: String, default: 'pendiente' },
+  estado: { type: String, default: 'empezar preparacion' },
 }, {versionKey: false})
 
 export const pedidoModel = mongoose.model(pedidosCollection, pedidoSchema)

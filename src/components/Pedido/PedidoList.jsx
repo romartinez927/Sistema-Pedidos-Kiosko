@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import "./PedidoList.css"
 
-function PedidoList( {pedido} ) {
+function PedidoList( {pedido, socket} ) {
   const [estado, setEstado] = useState(pedido.estado)
   const nombre = pedido.products[0].product[0].nombre
   const cantidad = pedido.products[0].product[0].cantidad
@@ -14,11 +14,17 @@ function PedidoList( {pedido} ) {
       },
     })
     .then(response => response.json())
-    .then(data => setEstado(data.estado))
+    .then(data => {
+      setEstado(data.estado)
+      const newEstado = data.estado
+      socket.emit("send_message", { message: newEstado})
+    })
     .catch(error => {
       console.error('Error en la solicitud PUT:', error)
     })
   }
+
+
 
   return (
     <div className="card-pedidos p-4 m-2 border rounded">

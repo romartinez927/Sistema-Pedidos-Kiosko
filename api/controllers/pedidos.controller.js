@@ -68,7 +68,7 @@ export async function handlePutEstado(req, res, next) {
           return res.status(404).json({ message: 'Pedido no encontrado' });
         }
     
-        else if (pedido.estado == 'pendiente') {
+        else if (pedido.estado == 'empezar preparacion') {
           pedido.estado = 'preparando';
           await pedido.save();
           return res.status(400).json({ estado: 'preparando' });
