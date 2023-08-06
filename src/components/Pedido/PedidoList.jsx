@@ -1,0 +1,41 @@
+import React, { useState } from 'react'
+import "./PedidoList.css"
+
+function PedidoList( {pedido} ) {
+  const [estado, setEstado] = useState(pedido.estado)
+  const nombre = pedido.products[0].product[0].nombre
+  const cantidad = pedido.products[0].product[0].cantidad
+
+  const handleEstado = async(pedido) => {
+    await fetch(`${import.meta.env.VITE_API_URL}/pedidos/${pedido._id}/comenzar`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    .then(response => response.json())
+    .then(data => setEstado(data.estado))
+    .catch(error => {
+      console.error('Error en la solicitud PUT:', error)
+    })
+  }
+
+  return (
+    <div className="card-pedidos p-4 m-2 border rounded">
+      <h3>{nombre}</h3>
+      <p>Cantidad: {cantidad}</p>
+      <div>
+        <h5>Adicionales</h5>
+        <p>Huevo</p>
+        <p>Papas Pay</p>
+      </div>
+      <div>
+        <h5>Aderezos</h5>
+        <p>Mayonesa</p>
+      </div>
+      <button className="btn btn-primary" onClick={() => handleEstado(pedido)}>{estado}</button>
+    </div>
+  )
+}
+
+export default PedidoList

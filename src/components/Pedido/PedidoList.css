@@ -1,0 +1,11 @@
+.card-pedidos {
+    min-width: 250px;
+}
+
+.card-pedidos h3{
+    text-align: center;
+}
+
+.card-pedidos button {
+    margin: 0 auto;
+}
