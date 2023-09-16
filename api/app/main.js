@@ -18,7 +18,7 @@ const httpServer = app.listen(PORT)
 
 const io = new SocketIOServer(httpServer, {
     cors: {
-        origin: "http://localhost:5173",
+        origin: "https://deluxe-lolly-660eac.netlify.app",
         methods: ["GET", "POST"]
     }
 })

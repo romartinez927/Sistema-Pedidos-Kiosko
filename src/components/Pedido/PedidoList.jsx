@@ -7,7 +7,7 @@ function PedidoList( {pedido, socket} ) {
   const cantidad = pedido.products[0].product[0].cantidad
 
   const handleEstado = async(pedido) => {
-    await fetch(`${import.meta.env.VITE_API_URL}/pedidos/${pedido._id}/comenzar`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/pedidos/${pedido._id}/comenzar`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PedidosContainer from './components/PedidosContainer/PedidosContainer';
 import Prueba from './components/Prueba/Prueba';
 import io from "socket.io-client"
-const socket = io.connect("http://localhost:4000")
+const socket = io.connect("https://sistema-pedidos.onrender.com")
 
 function App() {
 
