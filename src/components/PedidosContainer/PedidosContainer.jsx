@@ -19,7 +19,7 @@ function PedidosContainer() {
 
     
   return (
-    <main className='py-5 px-4'>
+    <main>
         <h1 className='text-center'>Listado de Pedidos</h1>
         <div className='d-flex justify-content-center flex-wrap'>
         {
