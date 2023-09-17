@@ -1,5 +1,5 @@
 import React from 'react'
-import PedidosContainer from '../PedidosContainer/PedidosContainer'
+import PedidosContainer from '../../views/Pedidos/components/PedidosContainer/PedidosContainer'
 
 function Navbar() {
     return (
