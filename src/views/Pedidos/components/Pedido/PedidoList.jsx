@@ -23,7 +23,7 @@ function PedidoList( {pedido, socket} ) {
     .then(data => {
       setEstado(data.estado)
       const newEstado = data.estado
-      // socket.emit("send_message", { message: newEstado})
+      socket.emit("send_message", { message: newEstado})
     })
     .catch(error => {
       console.error('Error en la solicitud PUT:', error)

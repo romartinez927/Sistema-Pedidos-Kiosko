@@ -5,7 +5,7 @@ import PedidosContainer from './views/Pedidos/components/PedidosContainer/Pedido
 import Prueba from './views/Prueba/Prueba';
 import io from "socket.io-client"
 import ProductosContainer from './views/Home/components/ProductosContainer/ProductosContainer';
-// const socket = io.connect("https://sistema-pedidos.onrender.com")
+const socket = io.connect(`${import.meta.env.VITE_API_URL}`)
 
 function App() {
 

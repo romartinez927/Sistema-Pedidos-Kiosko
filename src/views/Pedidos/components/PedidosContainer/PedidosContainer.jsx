@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import PedidoList from '../Pedido/PedidoList';
-// import io from "socket.io-client"
-// const socket = io.connect("https://sistema-pedidos.onrender.com")
+import io from "socket.io-client"
+const socket = io.connect(`${import.meta.env.VITE_API_URL}`)
 
 function PedidosContainer() {
     const [pedidos, setPedidos] = useState([]);
@@ -11,12 +11,11 @@ function PedidosContainer() {
       axios.get(`${import.meta.env.VITE_API_URL}/api/pedidos`).then((response) => {
         setPedidos(response.data);
         console.log(response.data);
-        // socket.on("enviar_prueba", (data) => {
-        //     alert(data)
-        // })
+        socket.on("enviar_prueba", (data) => {
+            alert(data)
+        })
       });
-    }, []);
-  // }, [socket]);
+  }, [socket]);
 
 
   return (
@@ -26,8 +25,10 @@ function PedidosContainer() {
         <div className='d-flex justify-content-center flex-wrap'>
         {
             pedidos.map((pedido, index) => (
-            <PedidoList key={index} pedido={pedido} 
-            // socket={socket}
+            <PedidoList 
+              key={index} 
+              pedido={pedido} 
+              socket={socket}
             />
             ))
         }
