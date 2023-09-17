@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import "./PedidoList.css"
+import { setEstadoPedido } from '../../../../../api/setEstadoPedido';
 
 function PedidoList( {pedido, socket} ) {
 
@@ -7,34 +8,26 @@ function PedidoList( {pedido, socket} ) {
     nombre: pedido?.product_id?.[0]?.product[0]?.nombre,
     estado: pedido?.estado,
     cantidad: pedido?.cantidad,
-    adicionales: pedido?.adicionales[0]?.nombre,
-    aderezos: pedido?.aderezos[0]?.nombre
+    adicionales: pedido?.adicionales,
+    aderezos: pedido?.aderezos
   });
   const [estado, setEstado] = useState(pedido.estado)
 
   const handleEstado = async(pedido) => {
-    await fetch(`${import.meta.env.VITE_API_URL}/api/pedidos/${pedido._id}/comenzar`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    })
-    .then(response => response.json())
-    .then(data => {
-      setEstado(data.estado)
+    const nuevoEstado = await setEstadoPedido(pedido._id)
+    setEstado(nuevoEstado.estado)
+    if (nuevoEstado) {
       const newEstado = data.estado
       socket.emit("send_message", { message: newEstado})
-    })
-    .catch(error => {
-      console.error('Error en la solicitud PUT:', error)
-    })
+    }
   }
-
+  console.log(data)
 
   return (
     <div className="card-pedidos p-4 m-2 border rounded">
       {/* PEDIDO */}
       <h3>{data.nombre}</h3>
+      <p>Cantidad: {data.cantidad}</p>
       <div>
         <h5>Adicionales</h5>
         <p>Huevo</p>

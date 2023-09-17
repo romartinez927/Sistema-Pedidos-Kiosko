@@ -2,20 +2,25 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import PedidoList from '../Pedido/PedidoList';
 import io from "socket.io-client"
+import { getPedidos } from '../../../../../api/getPedidos';
 const socket = io.connect(`${import.meta.env.VITE_API_SOCKET}`)
 
 function PedidosContainer() {
     const [pedidos, setPedidos] = useState([]);
 
     useEffect(() => {
-      
-      axios.get(`${import.meta.env.VITE_API_URL}/api/pedidos`).then((response) => {
-        setPedidos(response.data);
-        console.log(response.data);
-        socket.on("enviar_prueba", (data) => {
+      async function fetchData() {
+        try {
+          const data = await getPedidos()
+          setPedidos(data)
+          socket.on("enviar_prueba", (data) => {
             alert(data)
-        })
-      });
+          })
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+      fetchData()
   }, [socket]);
 
 

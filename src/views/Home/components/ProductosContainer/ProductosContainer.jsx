@@ -15,14 +15,9 @@ function ProductosContainer() {
 
   useEffect(() => {
     async function fetchData() {
-      try {
-        const data = await getProductos()
-        setProductos(data)
-
-      } catch (error) {
-          console.error('Error fetching data:', error);
-      }
-  }
+      const data = await getProductos()
+      setProductos(data)
+    }
     fetchData()
   }, [])
 
@@ -33,20 +28,20 @@ function ProductosContainer() {
       <div className='d-flex flex-column justify-content-center align-items-center gap-3 mt-4'>
         {
           productos.map((producto, index) => (
-            <button 
-              key={index} 
-              data-bs-toggle="modal" 
-              data-bs-target="#exampleModal" 
+            <button
+              key={index}
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
               className='px-5 py-3 fs-3'
               onClick={() => handleProductClick(producto)}>
-                {producto.nombre}
+              {producto.nombre}
             </button>
           ))
         }
       </div>
 
       {/* MODAL PARA HACER PEDIDO */}
-      <HacerPedido producto={selectedProduct}/>
+      <HacerPedido producto={selectedProduct} />
     </div>
   )
 }

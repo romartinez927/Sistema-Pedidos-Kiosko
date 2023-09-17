@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { getAderezos } from '../../../../api/getAderezos'
 import { getAdicionales } from '../../../../api/getAdicionales'
+import { setNuevoPedido } from '../../../../api/setNuevoPedido'
 
 function HacerPedido({ producto }) {
     const [adicionales, setAdicionales] = useState(null)
@@ -12,38 +13,22 @@ function HacerPedido({ producto }) {
         cantidad: '',
         adicionales: {},
         aderezos: {},
-        product_id: producto?._id
+        product_id: ""
     })
-
-    console.log(formData)
 
     const handleChange = (event) => {
         const { name, value } = event.target
         setFormData({ ...formData, [name]: value })
     }
 
-    const handleAdicionalChange = (e) => {
+    const handleCheckboxChange = (fieldName, e) => {
         const { id, checked } = e.target;
         
         setFormData(prevFormData => {
           return {
             ...prevFormData,
-            adicionales: {
-              ...prevFormData.adicionales,
-              [id]: checked
-            }
-          };
-        });
-      };
-
-      const handleAderezoChange = (e) => {
-        const { id, checked } = e.target;
-        
-        setFormData(prevFormData => {
-          return {
-            ...prevFormData,
-            aderezos: {
-              ...prevFormData.aderezos,
+            [fieldName]: {
+              ...prevFormData[fieldName],
               [id]: checked
             }
           };
@@ -52,49 +37,31 @@ function HacerPedido({ producto }) {
 
     useEffect(() => {
         async function fetchData() {
-            try {
-              const dataAderezos = await getAderezos()
-              setAderezos(dataAderezos)
-              console.log(aderezos)
-              const dataAdicionales = await getAdicionales()
-              setAdicionales(dataAdicionales)
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }   
+            const dataAderezos = await getAderezos()
+            setAderezos(dataAderezos)
+            const dataAdicionales = await getAdicionales()
+            setAdicionales(dataAdicionales) 
         }
           fetchData()
-    }, [producto])
+    }, [])
 
-    const enviarPedido = async (formData) => {
-        try {
-            const url = `${import.meta.env.VITE_API_URL}/api/pedidos`
-    
-            let config = {
-                method: 'post',
-                maxBodyLength: Infinity,
-                url: url,
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                data: formData
-            };
-    
-            const response = await axios.request(config)
-            console.log(response)
-            return response
-        } catch (error) {
-            console.error("Error al crear nueva muestra", error)
-            throw error
-        }
-    }
+    const enviarPedido = (formData) => setNuevoPedido(formData);
 
     const handlePedido = (e) => {
         e.preventDefault();
-        const response = enviarPedido(formData)
+        enviarPedido(formData)
     }
 
-    console.log(producto?._id)
+    useEffect(() => {
+        // Actualizar product_id cuando producto tiene un valor válido
+        if (producto && producto.id) {
+          setFormData(prevFormData => ({
+            ...prevFormData,
+            product_id: {product: producto.id}
+          }));
+        }
+      }, [producto]);
+
     return (
         <form method="post" onSubmit={handlePedido}>
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -105,7 +72,7 @@ function HacerPedido({ producto }) {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                            
+                        <input type="text" hidden className="form-control" name="product_id" id="product_id" />
                             {/* CANTIDAD */}
                             <h5>Cantidad</h5>
                             <div className="mb-3">
@@ -121,7 +88,7 @@ function HacerPedido({ producto }) {
                                             className="form-check-input" 
                                             type="checkbox" 
                                             role="switch" 
-                                            onChange={handleAdicionalChange} 
+                                            onChange={(e) => handleCheckboxChange('adicionales', e)} 
                                             id={adicional.nombre} 
                                         />
                                         <label className="form-check-label" htmlFor={adicional.nombre}>{adicional.nombre}</label>
@@ -137,7 +104,7 @@ function HacerPedido({ producto }) {
                                         <input className="form-check-input" 
                                             type="checkbox" 
                                             role="switch" 
-                                            onChange={handleAderezoChange} 
+                                            onChange={(e) => handleCheckboxChange('aderezos', e)} 
                                             id={aderezo.nombre} 
                                         />
                                         <label className="form-check-label" htmlFor={aderezo.nombre}>{aderezo.nombre}</label>
