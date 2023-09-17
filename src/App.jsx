@@ -7,7 +7,7 @@ import Prueba from './views/Prueba/Prueba';
 import ProductosContainer from './views/Home/components/ProductosContainer/ProductosContainer';
 import ListaProductos from './views/dashboard/productos/lista/page';
 import EditarProducto from './views/dashboard/productos/editar/page';
-import AgregarProducto from './views/dashboard/productos/agregar/page';
+import AltaProducto from './views/dashboard/productos/agregar/page';
 // const socket = io.connect(`${import.meta.env.VITE_API_URL}`)
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
                 <Route path="/prueba" element={<Prueba />} />
                 <Route path="/adicionales" element={<Prueba />} />
                 <Route path="/productos" element={<ListaProductos />} />
-                <Route path="/productos/agregar" element={<AgregarProducto />} />
+                <Route path="/productos/agregar" element={<AltaProducto />} />
                 <Route path="/productos/editar/:productoId" element={<EditarProducto />} />
             </Routes>
         </BrowserRouter>
