@@ -2,7 +2,14 @@ import React, { useState } from 'react'
 import "./PedidoList.css"
 
 function PedidoList( {pedido, socket} ) {
-  console.log(pedido)
+
+  const [data, setData] = useState({
+    nombre: pedido?.product_id?.[0]?.product[0]?.nombre,
+    estado: pedido?.estado,
+    cantidad: pedido?.cantidad,
+    adicionales: pedido?.adicionales[0]?.nombre,
+    aderezos: pedido?.aderezos[0]?.nombre
+  });
   const [estado, setEstado] = useState(pedido.estado)
 
   const handleEstado = async(pedido) => {
@@ -24,10 +31,10 @@ function PedidoList( {pedido, socket} ) {
   }
 
 
-
   return (
     <div className="card-pedidos p-4 m-2 border rounded">
-      <h3>{nombre}</h3>
+      {/* PEDIDO */}
+      <h3>{data.nombre}</h3>
       <div>
         <h5>Adicionales</h5>
         <p>Huevo</p>
