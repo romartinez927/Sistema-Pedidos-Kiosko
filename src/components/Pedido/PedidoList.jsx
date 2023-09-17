@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import "./PedidoList.css"
 
 function PedidoList( {pedido, socket} ) {
+  console.log(pedido)
   const [estado, setEstado] = useState(pedido.estado)
-  const nombre = pedido.products
 
   const handleEstado = async(pedido) => {
     await fetch(`${import.meta.env.VITE_API_URL}/api/pedidos/${pedido._id}/comenzar`, {
