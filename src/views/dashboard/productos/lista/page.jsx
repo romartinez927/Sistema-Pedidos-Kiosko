@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom';
 import { getProductos } from '../../../../../api/getProductos';
+import { siteConfig } from '../../../../../config/siteConfig';
+import { useNavigate } from 'react-router-dom';
 
 const ListaProductos = () => {
     const [productos, setProductos] = useState([]);
@@ -17,8 +20,16 @@ const ListaProductos = () => {
         }
         fetchProductos();
     }, []);
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate(`${siteConfig.links.productos_agregar}`);
+      };
     return (
         <main>
+            <div className='row mt-5'>
+                <button className='w-25' onClick={handleClick}>Agregar producto</button>
+            </div>
             <h1 className='text-center'>Listado de Productos</h1>
             <div className='d-flex justify-content-center flex-wrap'>
                 {
@@ -26,10 +37,10 @@ const ListaProductos = () => {
                         <>
                             <ul>
                                 {
-                                    productos?.map((producto, index) => (
+                                    productos?.map((producto) => (
                                         <li key={producto?.id}>
                                             <span>{producto?.nombre}</span>
-                                            <a href="" style={{marginLeft: 20, cursor: 'pointer'}}>editar</a>
+                                            <Link style={{ marginLeft: 20, cursor: 'pointer' }} to={`${siteConfig.links.productos_editar}/${producto.id}`}>editar</Link>
                                         </li>
                                     ))
                                 }

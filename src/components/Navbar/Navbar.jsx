@@ -1,5 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
+import { NavLink } from "react-router-dom";
+import { siteConfig } from '../../../config/siteConfig'
 // import PedidosContainer from '../../views/Pedidos/components/PedidosContainer/PedidosContainer'
 
 function Navbar() {
@@ -12,22 +14,17 @@ function Navbar() {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav">
-                            <li className="nav-item">
-                                <Link className="nav-link" aria-current="page" to="/">Inicio</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" aria-current="page" to="/pedidos">Pedidos</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" aria-current="page" to="/prueba">Prueba</Link>
-                            </li>
-
-                            <li className="nav-item">
-                                <Link className="nav-link" aria-current="page" to="/productos">Productos</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" aria-current="page" to="/adicionales">Adicionales</Link>
-                            </li>
+                            {siteConfig.navMenuItems.map((item, index) => (
+                                <NavLink
+                                    key={index}
+                                    className={({ isActive, isPending }) =>
+                                        isPending ? "nav-link pending" : isActive ? "nav-link active" : "nav-link"
+                                    }
+                                    to={`${item.href}`}
+                                >
+                                    {item.label}
+                                </NavLink>
+                            ))}
                         </ul>
                     </div>
                     <button className="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Pedidos</button>
