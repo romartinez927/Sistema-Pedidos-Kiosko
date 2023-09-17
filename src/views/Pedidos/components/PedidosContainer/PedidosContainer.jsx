@@ -2,12 +2,13 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import PedidoList from '../Pedido/PedidoList';
 import io from "socket.io-client"
-const socket = io.connect(`${import.meta.env.VITE_API_URL}`)
+const socket = io.connect(`${import.meta.env.VITE_API_SOCKET}`)
 
 function PedidosContainer() {
     const [pedidos, setPedidos] = useState([]);
 
     useEffect(() => {
+      
       axios.get(`${import.meta.env.VITE_API_URL}/api/pedidos`).then((response) => {
         setPedidos(response.data);
         console.log(response.data);
