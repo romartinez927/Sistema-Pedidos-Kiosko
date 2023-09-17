@@ -1,5 +1,6 @@
 import React from 'react'
-import PedidosContainer from '../../views/Pedidos/components/PedidosContainer/PedidosContainer'
+import { Link } from 'react-router-dom'
+// import PedidosContainer from '../../views/Pedidos/components/PedidosContainer/PedidosContainer'
 
 function Navbar() {
     return (
@@ -12,20 +13,20 @@ function Navbar() {
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="/">Inicio</a>
+                                <Link className="nav-link" aria-current="page" to="/">Inicio</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="/pedidos">Pedidos</a>
+                                <Link className="nav-link" aria-current="page" to="/pedidos">Pedidos</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/prueba">Prueba</a>
+                                <Link className="nav-link" aria-current="page" to="/prueba">Prueba</Link>
                             </li>
 
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="/productos">Productos</a>
+                                <Link className="nav-link" aria-current="page" to="/productos">Productos</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/prueba">Adicionales</a>
+                                <Link className="nav-link" aria-current="page" to="/adicionales">Adicionales</Link>
                             </li>
                         </ul>
                     </div>

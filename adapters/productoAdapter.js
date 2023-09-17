@@ -1,6 +1,7 @@
 export const adaptarProductoParaWeb = (apiData) => ({
-    id: apiData.id,
+    id: apiData._id,
     nombre: apiData.nombre,
+    estado: apiData.estado,
 });
 
 export const adaptarProductoParaApi = (appData) => ({
