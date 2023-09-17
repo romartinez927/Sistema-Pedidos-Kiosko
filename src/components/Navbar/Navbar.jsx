@@ -21,6 +21,12 @@ function Navbar() {
                                 <a className="nav-link" href="/prueba">Prueba</a>
                             </li>
 
+                            <li className="nav-item">
+                                <a className="nav-link active" aria-current="page" href="/productos">Productos</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="/prueba">Adicionales</a>
+                            </li>
                         </ul>
                     </div>
                     <button className="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Pedidos</button>
