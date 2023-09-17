@@ -37,7 +37,7 @@ function Navbar() {
                     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body">
-                    <PedidosContainer/>
+                    {/* <PedidosContainer/> */}
                 </div>
             </div>
         </>

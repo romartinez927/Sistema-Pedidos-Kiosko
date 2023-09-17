@@ -3,30 +3,21 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import HacerPedido from '../../modal/HacerPedido';
-import { getProductos } from '../../../../../api/getProductos';
 
 function ProductosContainer() {
   const [productos, setProductos] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null)
-  const [isLoading, setIsLoading] = useState(true)
 
   const handleProductClick = (producto) => {
     setSelectedProduct(producto)
-  }  
+  }
 
   useEffect(() => {
-    async function fetchProductos() {
-      try {
-        const data = await getProductos();
-        setProductos(data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      } finally {
-        setIsLoading(false)
-      }
-    }
-    fetchProductos();
-  }, []);
+    axios.get(`${import.meta.env.VITE_API_URL}/api/products`).then((response) => {
+      setProductos(response.data);
+      console.log(response.data);
+    })
+  }, [])
 
   return (
     <div className='mt-3'>
