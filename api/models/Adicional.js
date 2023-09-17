@@ -1,4 +1,4 @@
-export class Producto {
+export class Adicional {
     #nombre
 
     constructor({ nombre }) {

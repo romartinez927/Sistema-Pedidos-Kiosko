@@ -3,8 +3,7 @@ import "./PedidoList.css"
 
 function PedidoList( {pedido, socket} ) {
   const [estado, setEstado] = useState(pedido.estado)
-  const nombre = pedido.products[0].product[0].nombre
-  const cantidad = pedido.products[0].product[0].cantidad
+  const nombre = pedido.products
 
   const handleEstado = async(pedido) => {
     await fetch(`${import.meta.env.VITE_API_URL}/api/pedidos/${pedido._id}/comenzar`, {
@@ -17,7 +16,7 @@ function PedidoList( {pedido, socket} ) {
     .then(data => {
       setEstado(data.estado)
       const newEstado = data.estado
-      socket.emit("send_message", { message: newEstado})
+      // socket.emit("send_message", { message: newEstado})
     })
     .catch(error => {
       console.error('Error en la solicitud PUT:', error)
@@ -29,7 +28,6 @@ function PedidoList( {pedido, socket} ) {
   return (
     <div className="card-pedidos p-4 m-2 border rounded">
       <h3>{nombre}</h3>
-      <p>Cantidad: {cantidad}</p>
       <div>
         <h5>Adicionales</h5>
         <p>Huevo</p>

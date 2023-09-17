@@ -22,11 +22,9 @@ export async function handleGetById(req, res, next) {
 
 export async function handlePost(req, res, next) {
     try {
-        const carrito = new Pedido({
-            products: []
-        })
-        const cart = await pedidosRepository.create(carrito.datos())
-        res.json(cart)
+        const pedido = new Pedido(req.body)
+        const pedidoCreado = await pedidosRepository.create(pedido.datos())
+        res.json(pedidoCreado)
     } catch (error) {
         next(error)
     }

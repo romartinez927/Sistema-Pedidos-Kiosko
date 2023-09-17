@@ -7,7 +7,7 @@ const productsCollection = 'products'
 
 const productSchema = new Schema({
     nombre: { type: String, required: true },
-    cantidad: { type: Number, required: true },
+    estado: { type: Boolean, default: true },
 }, { versionKey: false })
 
 productSchema.plugin(mongooseAggregatePaginate)

@@ -5,7 +5,7 @@ import PedidosContainer from './components/PedidosContainer/PedidosContainer';
 import Prueba from './components/Prueba/Prueba';
 import io from "socket.io-client"
 import ProductosContainer from './components/ProductosContainer/ProductosContainer';
-const socket = io.connect("https://sistema-pedidos.onrender.com")
+// const socket = io.connect("https://sistema-pedidos.onrender.com")
 
 function App() {
 

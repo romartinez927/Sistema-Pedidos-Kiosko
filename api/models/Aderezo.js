@@ -1,4 +1,4 @@
-export class Producto {
+export class Aderezo {
     #nombre
 
     constructor({ nombre }) {
