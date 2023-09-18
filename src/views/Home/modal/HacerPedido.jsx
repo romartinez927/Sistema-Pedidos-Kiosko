@@ -8,11 +8,13 @@ import { setNuevoPedido } from '../../../../api/setNuevoPedido'
 
 function HacerPedido({ producto }) {
     const [adicionales, setAdicionales] = useState(null)
+    const [arrayAdicionales, setArrayAdicionales] = useState([])
     const [aderezos, setAderezos] = useState(null)
+    const [arrayAderezos, setArrayAderezos] = useState([])
     const [formData, setFormData] = useState({
-        cantidad: '',
-        adicionales: {},
-        aderezos: {},
+        cantidad: 1,
+        adicionales: arrayAdicionales,
+        aderezos: arrayAderezos,
         product_id: ""
     })
 
@@ -21,28 +23,40 @@ function HacerPedido({ producto }) {
         setFormData({ ...formData, [name]: value })
     }
 
-    const handleCheckboxChange = (fieldName, e) => {
-        const { id, checked } = e.target;
-        
-        setFormData(prevFormData => {
-          return {
-            ...prevFormData,
-            [fieldName]: {
-              ...prevFormData[fieldName],
-              [id]: checked
-            }
-          };
-        });
-      };
+    const handleCheckboxChangeAderezos = (e) => {
+        const { value, checked } = e.target;
+        if (checked) {
+            setArrayAderezos([...arrayAderezos, value]);
+        } else {
+            setArrayAderezos(arrayAderezos.filter((item) => item !== value));
+        }
+    }
+
+
+
+    const handleCheckboxChangeAdicionales = (e) => {
+        const { value, checked } = e.target;
+        if (checked) {
+            setArrayAdicionales([...arrayAdicionales, value]);
+        } else {
+            setArrayAdicionales(arrayAdicionales.filter((item) => item !== value));
+        }
+    };
+
+    useEffect(() => {
+        setFormData({ ...formData, adicionales: arrayAdicionales, aderezos: arrayAderezos })
+    }, [arrayAderezos, arrayAdicionales])
+    
+
 
     useEffect(() => {
         async function fetchData() {
             const dataAderezos = await getAderezos()
             setAderezos(dataAderezos)
             const dataAdicionales = await getAdicionales()
-            setAdicionales(dataAdicionales) 
+            setAdicionales(dataAdicionales)
         }
-          fetchData()
+        fetchData()
     }, [])
 
     const enviarPedido = (formData) => setNuevoPedido(formData);
@@ -53,14 +67,13 @@ function HacerPedido({ producto }) {
     }
 
     useEffect(() => {
-        // Actualizar product_id cuando producto tiene un valor válido
         if (producto && producto.id) {
-          setFormData(prevFormData => ({
-            ...prevFormData,
-            product_id: {product: producto.id}
-          }));
+            setFormData(prevFormData => ({
+                ...prevFormData,
+                product_id: producto.id
+            }));
         }
-      }, [producto]);
+    }, [producto]);
 
     return (
         <form method="post" onSubmit={handlePedido}>
@@ -72,11 +85,11 @@ function HacerPedido({ producto }) {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                        <input type="text" hidden className="form-control" name="product_id" id="product_id" />
+                            <input type="text" hidden className="form-control" name="product_id" id="product_id" />
                             {/* CANTIDAD */}
                             <h5>Cantidad</h5>
                             <div className="mb-3">
-                                <input type="number" className="form-control" onChange={handleChange} name="cantidad" id="cantidad" />
+                                <input type="number" className="form-control" onChange={handleChange} name="cantidad" id="cantidad" value={formData?.cantidad} />
                             </div>
 
                             {/* ADICIONALES */}
@@ -84,12 +97,13 @@ function HacerPedido({ producto }) {
                             {
                                 adicionales && adicionales.map((adicional, index) => (
                                     <div key={index} className="form-check form-switch">
-                                        <input 
-                                            className="form-check-input" 
-                                            type="checkbox" 
-                                            role="switch" 
-                                            onChange={(e) => handleCheckboxChange('adicionales', e)} 
-                                            id={adicional.nombre} 
+                                        <input
+                                            className="form-check-input"
+                                            type="checkbox"
+                                            role="switch"
+                                            onChange={(e) => handleCheckboxChangeAdicionales(e)}
+                                            id={adicional.nombre}
+                                            value={adicional._id}
                                         />
                                         <label className="form-check-label" htmlFor={adicional.nombre}>{adicional.nombre}</label>
                                     </div>
@@ -101,11 +115,13 @@ function HacerPedido({ producto }) {
                             {
                                 aderezos && aderezos.map((aderezo, index) => (
                                     <div key={index} className="form-check form-switch">
-                                        <input className="form-check-input" 
-                                            type="checkbox" 
-                                            role="switch" 
-                                            onChange={(e) => handleCheckboxChange('aderezos', e)} 
-                                            id={aderezo.nombre} 
+                                        <input className="form-check-input"
+                                            type="checkbox"
+                                            role="switch"
+                                            onChange={(e) => handleCheckboxChangeAderezos(e)}
+                                            id={aderezo.nombre}
+                                            name={aderezo.nombre}
+                                            value={aderezo._id}
                                         />
                                         <label className="form-check-label" htmlFor={aderezo.nombre}>{aderezo.nombre}</label>
                                     </div>
