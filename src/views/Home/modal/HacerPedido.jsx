@@ -18,26 +18,26 @@ function HacerPedido({ producto }) {
         product_id: ""
     })
 
+    console.log(producto)
+
     const handleChange = (event) => {
         const { name, value } = event.target
         setFormData({ ...formData, [name]: value })
     }
 
     const handleCheckboxChangeAderezos = (e) => {
-        const { value, checked } = e.target;
+        const { value, id, checked } = e.target;
         if (checked) {
-            setArrayAderezos([...arrayAderezos, value]);
+            setArrayAderezos([...arrayAderezos, {id: value, nombre: id}]);
         } else {
             setArrayAderezos(arrayAderezos.filter((item) => item !== value));
         }
     }
 
-
-
     const handleCheckboxChangeAdicionales = (e) => {
-        const { value, checked } = e.target;
+        const { value, id, checked } = e.target;
         if (checked) {
-            setArrayAdicionales([...arrayAdicionales, value]);
+            setArrayAdicionales([...arrayAdicionales, {id: value, nombre: id}]);
         } else {
             setArrayAdicionales(arrayAdicionales.filter((item) => item !== value));
         }
@@ -47,7 +47,6 @@ function HacerPedido({ producto }) {
         setFormData({ ...formData, adicionales: arrayAdicionales, aderezos: arrayAderezos })
     }, [arrayAderezos, arrayAdicionales])
     
-
 
     useEffect(() => {
         async function fetchData() {
@@ -130,7 +129,7 @@ function HacerPedido({ producto }) {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" className="btn btn-primary">Enviar Pedido</button>
+                            <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Enviar Pedido</button>
                         </div>
                     </div>
                 </div>

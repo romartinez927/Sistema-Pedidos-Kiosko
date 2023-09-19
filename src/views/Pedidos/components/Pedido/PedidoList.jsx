@@ -5,7 +5,7 @@ import { setEstadoPedido } from '../../../../../api/setEstadoPedido';
 function PedidoList( {pedido, socket} ) {
 
   const [data, setData] = useState({
-    nombre: pedido?.product_id?.[0]?.product[0]?.nombre,
+    nombre: pedido?.product_id?.nombre,
     estado: pedido?.estado,
     cantidad: pedido?.cantidad,
     adicionales: pedido?.adicionales,
@@ -13,6 +13,7 @@ function PedidoList( {pedido, socket} ) {
   });
   const [estado, setEstado] = useState(pedido.estado)
 
+  console.log(data.adicionales)
   const handleEstado = async(pedido) => {
     const nuevoEstado = await setEstadoPedido(pedido._id)
     setEstado(nuevoEstado.estado)
@@ -21,7 +22,8 @@ function PedidoList( {pedido, socket} ) {
       socket.emit("send_message", { message: newEstado})
     }
   }
-  console.log(data)
+  console.log(pedido)
+
 
   return (
     <div className="card-pedidos p-4 m-2 border rounded">
@@ -30,12 +32,19 @@ function PedidoList( {pedido, socket} ) {
       <p>Cantidad: {data.cantidad}</p>
       <div>
         <h5>Adicionales</h5>
-        <p>Huevo</p>
-        <p>Papas Pay</p>
+        {
+          data.adicionales.map((adicional, index) => (
+            <p key={index}>{adicional.nombre}</p>
+          ))
+        }
       </div>
       <div>
         <h5>Aderezos</h5>
-        <p>Mayonesa</p>
+        {
+          data.aderezos.map((aderezo, index) => (
+            <p key={index}>{aderezo.nombre}</p>
+          ))
+        }
       </div>
       <button className="btn btn-primary" onClick={() => handleEstado(pedido)}>{estado}</button>
     </div>
