@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
@@ -74,6 +73,12 @@ function HacerPedido({ producto }) {
         }
     }, [producto]);
 
+    useEffect(() => {
+      console.log('adicionales', adicionales)
+      console.log('arrAdicioPredeter',  producto?.adicionalesPredeterminados)
+    }, [producto])
+    
+
     return (
         <form method="post" onSubmit={handlePedido}>
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -100,9 +105,14 @@ function HacerPedido({ producto }) {
                                             className="form-check-input"
                                             type="checkbox"
                                             role="switch"
+                                            defaultChecked={
+                                                producto?.adicionalesPredeterminados 
+                                                ? producto?.adicionalesPredeterminados?.some((item)=> item.id === adicional.id)
+                                                : false
+                                            }
                                             onChange={(e) => handleCheckboxChangeAdicionales(e)}
                                             id={adicional.nombre}
-                                            value={adicional._id}
+                                            value={adicional.id}
                                         />
                                         <label className="form-check-label" htmlFor={adicional.nombre}>{adicional.nombre}</label>
                                     </div>
