@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { adaptarProductoParaWeb } from '../adapters/productoAdapter';
+import { adaptarProductoParaWeb } from '../../adapters/productoAdapter';
 const VITE_API_URL = import.meta.env.VITE_API_URL
 const END_POINT_GET_PRODUCTOS = import.meta.env.VITE_GET_PRODUCTOS_URL;
 

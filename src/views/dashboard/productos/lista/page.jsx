@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
-import { getProductos } from '../../../../../api/getProductos';
+import { getProductos } from '../../../../../api/productos/getProductos';
 import { siteConfig } from '../../../../../config/siteConfig';
 import { useNavigate } from 'react-router-dom';
 
@@ -27,15 +27,12 @@ const ListaProductos = () => {
       };
     return (
         <main>
-            <div className='row mt-5'>
-                <button className='w-25' onClick={handleClick}>Agregar producto</button>
-            </div>
             <h1 className='text-center'>Listado de Productos</h1>
-            <div className='d-flex justify-content-center flex-wrap'>
+            <div className='d-flex justify-content-center flex-column'>
                 {
                     isLoading ? "Cargando..." :
                         <>
-                            <ul>
+                            <ul className='mx-auto'>
                                 {
                                     productos?.map((producto) => (
                                         <li key={producto?.id}>
@@ -47,7 +44,13 @@ const ListaProductos = () => {
                             </ul>
                         </>
                 }
+                
+                <div className='mx-auto text-center'>
+                    <button onClick={handleClick}>Agregar producto</button>
+                </div>
+                
             </div>
+            
         </main>
     )
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import "./PedidoList.css"
-import { setEstadoPedido } from '../../../../../api/setEstadoPedido';
+import { setEstadoPedido } from '../../../../../api/pedidos/setEstadoPedido';
 
 function PedidoList( {pedido, socket} ) {
 

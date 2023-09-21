@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { adaptarAdicionalParaWeb } from '../adapters/adiccionalAdapter';
+import { adaptarAdicionalParaWeb } from '../../adapters/adicionalAdapter';
 const VITE_API_URL = import.meta.env.VITE_API_URL
 const END_POINT_GET_ADICIONALES = import.meta.env.VITE_GET_ADICIONALES_URL;
 

@@ -3,7 +3,7 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import HacerPedido from '../../modal/HacerPedido';
-import { getProductos } from '../../../../../api/getProductos';
+import { getProductos } from '../../../../../api/productos/getProductos';
 
 function ProductosContainer() {
   const [productos, setProductos] = useState([]);

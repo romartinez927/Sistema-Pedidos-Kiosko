@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { setNuevoProducto } from '../../../../../api/setNuevoProducto';
+import { setNuevoProducto } from '../../../../../api/productos/setNuevoProducto';
 
 function AltaProducto() {
     const [producto, setProducto] = useState({
@@ -46,8 +46,27 @@ function AltaProducto() {
                             <input
                                 type="checkbox"
                                 name="estado"
-                                checked={producto.estado}
-                                onChange={handleChange}
+                               
+                            />
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            Adicionales Predeterminados:
+                            <input
+                                type="text"
+                                name="adicionalPredeterminado"
+                                
+                            />
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            Aderezos Predeterminados:
+                            <input
+                                type="text"
+                                name="aderezoPredeterminado"
+                                
                             />
                         </label>
                     </div>

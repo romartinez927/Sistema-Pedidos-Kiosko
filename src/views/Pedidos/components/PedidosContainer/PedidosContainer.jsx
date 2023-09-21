@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import PedidoList from '../Pedido/PedidoList';
 import io from "socket.io-client"
-import { getPedidos } from '../../../../../api/getPedidos';
+import { getPedidos } from '../../../../../api/pedidos/getPedidos';
 const socket = io.connect(`${import.meta.env.VITE_API_SOCKET}`)
 
 function PedidosContainer() {

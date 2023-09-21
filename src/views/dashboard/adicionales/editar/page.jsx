@@ -1,49 +1,49 @@
 import React, { useEffect, useState } from 'react'
-import { getProducto } from '../../../../../api/productos/getProducto';
-import { updateProducto } from '../../../../../api/productos/updateProducto';
+import { getAdicional } from '../../../../../api/adicionales/getAdicional';
 import { useParams } from 'react-router-dom';
+import { updateAdicional } from '../../../../../api/adicionales/updateAdicional';
 
-const EditarProducto = () => {
-    let { productoId } = useParams();
-    const [producto, setProducto] = useState({
+const EditarAdicional = () => {
+    let { adicionalId } = useParams();
+    const [adicional, setAdicional] = useState({
         nombre: '',
         estado: false,
     });
     const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
-        async function fetchProducto() {
+        async function fetchAdicional() {
             try {
-                const data = await getProducto(productoId);
-                setProducto(data);
+                const data = await getAdicional(adicionalId);
+                setAdicional(data);
             } catch (error) {
-                console.error("Error fetching products:", error);
+                console.error("Error fetching adicionales:", error);
             } finally {
                 setIsLoading(false)
             }
         }
-        fetchProducto();
-    }, [productoId]);
+        fetchAdicional();
+    }, [adicionalId]);
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
         const newValue = type === 'checkbox' ? checked : value;
-        setProducto({ ...producto, [name]: newValue });
+        setAdicional({ ...adicional, [name]: newValue });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await updateProducto(productoId, producto);
-            console.log('Producto creado con éxito');
+            await updateAdicional(adicionalId, adicional);
+            console.log('Adicional creado con éxito');
         } catch (error) {
             // Maneja cualquier error que pueda ocurrir durante la solicitud.
-            console.error('Error al crear el producto', error);
+            console.error('Error al crear el adicional', error);
         }
     };
 
     return (
         <main>
-            <h1 className='text-center'>Editar producto</h1>
+            <h1 className='text-center'>Editar adicional</h1>
             <div className='d-flex justify-content-center flex-wrap'>
                 {
                     isLoading ? "Cargando..." :
@@ -55,7 +55,7 @@ const EditarProducto = () => {
                                         type="text"
                                         id="nombre"
                                         name="nombre"
-                                        value={producto?.nombre}
+                                        value={adicional?.nombre}
                                         onChange={handleChange}
                                         required
                                     />
@@ -66,12 +66,12 @@ const EditarProducto = () => {
                                         <input
                                             type="checkbox"
                                             name="estado"
-                                            checked={producto?.estado}
+                                            checked={adicional?.estado}
                                             onChange={handleChange}
                                         />
                                     </label>
                                 </div>
-                                <button type="submit">Guardar Producto</button>
+                                <button type="submit">Guardar Edicional</button>
                             </form>
                         </>
                 }
@@ -80,4 +80,4 @@ const EditarProducto = () => {
     )
 }
 
-export default EditarProducto
+export default EditarAdicional

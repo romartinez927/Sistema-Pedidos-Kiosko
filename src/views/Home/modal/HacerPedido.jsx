@@ -1,9 +1,9 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { getAderezos } from '../../../../api/getAderezos'
-import { getAdicionales } from '../../../../api/getAdicionales'
-import { setNuevoPedido } from '../../../../api/setNuevoPedido'
+import { getAderezos } from '../../../../api/aderezos/getAderezos'
+import { getAdicionales } from '../../../../api/adicionales/getAdicionales'
+import { setNuevoPedido } from '../../../../api/pedidos/setNuevoPedido'
 
 function HacerPedido({ producto }) {
     const [adicionales, setAdicionales] = useState(null)

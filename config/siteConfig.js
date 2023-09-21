@@ -53,5 +53,7 @@ export const siteConfig = {
         productos_editar: "/productos/editar",
         productos_agregar: "/productos/agregar",
         adicionales: "/adicionales",
+        adicionales_editar: "/adicionales/editar",
+        adicionales_agregar: "/adicionales/agregar",
     },
 };

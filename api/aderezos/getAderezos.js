@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { adaptarAderezoParaWeb } from '../adapters/aderezoAdapter';
+import { adaptarAderezoParaWeb } from '../../adapters/aderezoAdapter';
 const VITE_API_URL = import.meta.env.VITE_API_URL
 const END_POINT_GET_ADEREZOS = import.meta.env.VITE_GET_ADEREZOS_URL;
 
