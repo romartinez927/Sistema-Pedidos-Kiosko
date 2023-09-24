@@ -13,7 +13,7 @@ function PedidoList( {pedido, socket} ) {
   });
   const [estado, setEstado] = useState(pedido.estado)
 
-  console.log(data.adicionales)
+
   const handleEstado = async(pedido) => {
     const nuevoEstado = await setEstadoPedido(pedido._id)
     setEstado(nuevoEstado.estado)
@@ -22,7 +22,7 @@ function PedidoList( {pedido, socket} ) {
       socket.emit("send_message", { message: newEstado})
     }
   }
-  console.log(pedido)
+
 
 
   return (

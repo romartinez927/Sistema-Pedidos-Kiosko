@@ -13,8 +13,9 @@ function PedidosContainer() {
         try {
           const data = await getPedidos()
           setPedidos(data)
-          socket.on("enviar_prueba", (data) => {
-            alert(data)
+          socket.on("enviar_prueba", async(data) => {
+            const dataSocket = await getPedidos()
+            setPedidos(dataSocket)
           })
         } catch (error) {
             console.error('Error fetching data:', error);
