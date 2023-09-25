@@ -16,7 +16,6 @@ export const setEstadoPedido = async (idPedido) => {
         };
 
         const response = await axios.request(config)
-        console.log(response)
         return response.data
     } catch (error) {
         throw error;

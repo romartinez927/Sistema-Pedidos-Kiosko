@@ -34,7 +34,6 @@ const EditarProducto = () => {
         e.preventDefault();
         try {
             await updateProducto(productoId, producto);
-            console.log('Producto creado con éxito');
         } catch (error) {
             // Maneja cualquier error que pueda ocurrir durante la solicitud.
             console.error('Error al crear el producto', error);

@@ -9,8 +9,8 @@ const socket = io.connect(`${import.meta.env.VITE_API_SOCKET}`)
 
 function HacerPedido({ producto }) {
     const [adicionales, setAdicionales] = useState(null)
-    const [arrayAdicionales, setArrayAdicionales] = useState([])
     const [aderezos, setAderezos] = useState(null)
+    const [arrayAdicionales, setArrayAdicionales] = useState([])
     const [arrayAderezos, setArrayAderezos] = useState([])
     const [formData, setFormData] = useState({
         cantidad: 1,
@@ -18,8 +18,6 @@ function HacerPedido({ producto }) {
         aderezos: arrayAderezos,
         product_id: ""
     })
-
-    console.log(producto)
 
     const handleChange = (event) => {
         const { name, value } = event.target
@@ -29,7 +27,7 @@ function HacerPedido({ producto }) {
     const handleCheckboxChangeAderezos = (e) => {
         const { value, id, checked } = e.target;
         if (checked) {
-            setArrayAderezos([...arrayAderezos, {id: value, nombre: id}]);
+            setArrayAderezos([...arrayAderezos, { id: value, nombre: id }]);
         } else {
             setArrayAderezos(arrayAderezos.filter((item) => item !== value));
         }
@@ -38,7 +36,7 @@ function HacerPedido({ producto }) {
     const handleCheckboxChangeAdicionales = (e) => {
         const { value, id, checked } = e.target;
         if (checked) {
-            setArrayAdicionales([...arrayAdicionales, {id: value, nombre: id}]);
+            setArrayAdicionales([...arrayAdicionales, { id: value, nombre: id }]);
         } else {
             setArrayAdicionales(arrayAdicionales.filter((item) => item !== value));
         }
@@ -47,7 +45,7 @@ function HacerPedido({ producto }) {
     useEffect(() => {
         setFormData({ ...formData, adicionales: arrayAdicionales, aderezos: arrayAderezos })
     }, [arrayAderezos, arrayAdicionales])
-    
+
 
     useEffect(() => {
         async function fetchData() {
@@ -61,7 +59,7 @@ function HacerPedido({ producto }) {
 
     const enviarPedido = (formData) => {
         setNuevoPedido(formData)
-        socket.emit("send_prueba", {message: "nuevo pedido"})
+        socket.emit("send_prueba", { message: "nuevo pedido" })
     };
 
     const handlePedido = (e) => {
@@ -79,10 +77,10 @@ function HacerPedido({ producto }) {
     }, [producto]);
 
     useEffect(() => {
-      console.log('adicionales', adicionales)
-      console.log('arrAdicioPredeter',  producto?.adicionalesPredeterminados)
+        console.log('adicionales', adicionales)
+        console.log('arrAdicioPredeter', producto?.adicionalesPredeterminados)
     }, [producto])
-    
+
 
     return (
         <form method="post" onSubmit={handlePedido}>
@@ -111,9 +109,7 @@ function HacerPedido({ producto }) {
                                             type="checkbox"
                                             role="switch"
                                             defaultChecked={
-                                                producto?.adicionalesPredeterminados 
-                                                ? producto?.adicionalesPredeterminados?.some((item)=> item.id === adicional.id)
-                                                : false
+                                                producto?.adicionalesPredeterminados?.some((item) => item.id === adicional.id)
                                             }
                                             onChange={(e) => handleCheckboxChangeAdicionales(e)}
                                             id={adicional.nombre}
@@ -132,6 +128,9 @@ function HacerPedido({ producto }) {
                                         <input className="form-check-input"
                                             type="checkbox"
                                             role="switch"
+                                            defaultChecked={
+                                                producto?.adicionalesPredeterminados?.some((item) => item.id === aderezo.id)
+                                            }
                                             onChange={(e) => handleCheckboxChangeAderezos(e)}
                                             id={aderezo.nombre}
                                             name={aderezo.nombre}

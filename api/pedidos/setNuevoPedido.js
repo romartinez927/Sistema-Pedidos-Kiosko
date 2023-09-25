@@ -19,7 +19,6 @@ export const setNuevoPedido = async (pedido) => {
         };
 
         const response = await axios.request(config)
-        console.log(response)
         return response
     } catch (error) {
         throw error;
