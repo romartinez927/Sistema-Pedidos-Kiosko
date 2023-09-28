@@ -9,7 +9,8 @@ function PedidoList( {pedido, socket} ) {
     estado: pedido?.estado,
     cantidad: pedido?.cantidad,
     adicionales: pedido?.adicionales,
-    aderezos: pedido?.aderezos
+    aderezos: pedido?.aderezos,
+    nota: pedido?.nota ? pedido.nota : ""
   });
   const [estado, setEstado] = useState(pedido.estado)
 
@@ -46,6 +47,15 @@ function PedidoList( {pedido, socket} ) {
           ))
         }
       </div>
+      {
+        data.nota !== "" ? (
+          <div>
+            <h5>Nota</h5>
+            <p>{data.nota}</p>
+          </div>
+        ) :
+        <></>
+      }
       <button className="btn btn-primary" onClick={() => handleEstado(pedido)}>{estado}</button>
     </div>
   )

@@ -16,7 +16,8 @@ function HacerPedido({ producto }) {
         cantidad: 1,
         adicionales: arrayAdicionales,
         aderezos: arrayAderezos,
-        product_id: ""
+        product_id: "",
+        nota: ""
     })
 
     const handleChange = (event) => {
@@ -140,6 +141,14 @@ function HacerPedido({ producto }) {
                                     </div>
                                 ))
                             }
+                            <div className='d-flex flex-column'>
+                                <label htmlFor="nota">Nota:</label>
+                                <textarea 
+                                    name="nota"
+                                    value={formData.nota}
+                                    onChange={handleChange}
+                                />
+                            </div>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
