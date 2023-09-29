@@ -2,54 +2,54 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { siteConfig } from '../../../../../config/siteConfig';
 import { useNavigate } from 'react-router-dom';
-import { getAdicionales } from '../../../../../api/adicionales/getAdicionales';
-import { deleteAdicional } from '../../../../../api/adicionales/deleteAdicional';
+import { getAderezos } from '../../../../../api/aderezos/getAderezos';
+import { deleteAderezo } from '../../../../../api/aderezos/deleteAderezo';
 
-const ListaAdicionales = () => {
-    const [adicionales, setAdicionales] = useState([]);
+const ListaAderezos = () => {
+    const [aderezos, setAderezos] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
-        async function fetchAdicionales() {
+        async function fetchAderezos() {
             try {
-                const data = await getAdicionales();
-                setAdicionales(data);
+                const data = await getAderezos();
+                setAderezos(data);
             } catch (error) {
-                console.error("Error fetching adicionales:", error);
+                console.error("Error fetching aderezos:", error);
             } finally {
                 setIsLoading(false)
             }
         }
-        fetchAdicionales();
+        fetchAderezos();
     }, []);
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate(`${siteConfig.links.adicionales_agregar}`);
+        navigate(`${siteConfig.links.aderezos_agregar}`);
     };
 
-    const handleEliminarAdicional = (id) => {
-        const confirmacion = window.confirm('¿Estás seguro de que quieres eliminar este adicional?');
+    const handleEliminarAderezo = (id) => {
+        const confirmacion = window.confirm('¿Estás seguro de que quieres eliminar este aderezo?');
 
         if (confirmacion) {
-            deleteAdicional(id)
+            deleteAderezo(id)
         }
     };
     return (
         <main>
-            <h1 className='text-center'>Listado de Adicionales</h1>
+            <h1 className='text-center'>Listado de Aderezos</h1>
             <div className='d-flex justify-content-center flex-column'>
                 {
                     isLoading ? "Cargando..." :
                         <>
                             <ul className='mx-auto'>
                                 {
-                                    adicionales?.map((adicional) => (
-                                        <li key={adicional?.id}>
-                                            <span>{adicional?.nombre}</span>
-                                            <Link style={{ marginLeft: 20, cursor: 'pointer' }} to={`${siteConfig.links.adicionales_editar}/${adicional.id}`}>editar</Link>
+                                    aderezos?.map((aderezo) => (
+                                        <li key={aderezo?.id}>
+                                            <span>{aderezo?.nombre}</span>
+                                            <Link style={{ marginLeft: 20, cursor: 'pointer' }} to={`${siteConfig.links.aderezos_editar}/${aderezo.id}`}>editar</Link>
                                             <button
                                                 className="btn btn-link text-danger fw-semibold"
-                                                onClick={() => handleEliminarAdicional(adicional.id)}
+                                                onClick={() => handleEliminarAderezo(aderezo.id)}
                                             >
                                                 eliminar
                                             </button>
@@ -60,11 +60,11 @@ const ListaAdicionales = () => {
                         </>
                 }
                 <div className='mx-auto'>
-                    <button onClick={handleClick}>Agregar adicional</button>
+                    <button onClick={handleClick}>Agregar aderezo</button>
                 </div>
             </div>
         </main>
     )
 }
 
-export default ListaAdicionales
+export default ListaAderezos

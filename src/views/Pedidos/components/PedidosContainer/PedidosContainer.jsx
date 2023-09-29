@@ -7,6 +7,7 @@ const socket = io.connect(`${import.meta.env.VITE_API_SOCKET}`)
 
 function PedidosContainer() {
     const [pedidos, setPedidos] = useState([]);
+    const [filtroEstado, setFiltroEstado] = useState('todos'); // 'todos' es el valor inicial
 
     useEffect(() => {
       async function fetchData() {
@@ -24,14 +25,26 @@ function PedidosContainer() {
       fetchData()
   }, [socket]);
 
-
+  const pedidosFiltrados = pedidos.filter(pedido => {
+    if (filtroEstado === 'todos') {
+      return true;
+    } else {
+      return pedido.estado === filtroEstado;
+    }
+  });
   return (
     <main>
         {/* LISTADO DE PEDIDOS */}
         <h1 className='text-center'>Listado de Pedidos</h1>
+        <div className="d-flex justify-content-center gap-3">
+          <button onClick={() => setFiltroEstado('todos')}>Todos</button>
+          <button onClick={() => setFiltroEstado('empezar preparacion')}>Pendientes</button>
+          <button onClick={() => setFiltroEstado('preparando')}>En curso</button>
+          <button onClick={() => setFiltroEstado('finalizado')}>Finalizados</button>
+        </div>
         <div className='d-flex justify-content-center flex-wrap'>
         {
-            pedidos.map((pedido, index) => (
+            pedidosFiltrados.map((pedido, index) => (
             <PedidoList 
               key={index} 
               pedido={pedido} 

@@ -44,6 +44,10 @@ export const siteConfig = {
             label: "Adicionales",
             href: "/adicionales",
         },
+        {
+            label: "Aderezos",
+            href: "/aderezos",
+        },
     ],
     links: {
         inicio: "/",
@@ -55,5 +59,8 @@ export const siteConfig = {
         adicionales: "/adicionales",
         adicionales_editar: "/adicionales/editar",
         adicionales_agregar: "/adicionales/agregar",
+        aderezos: "/aderezos",
+        aderezos_editar: "/aderezos/editar",
+        aderezos_agregar: "/aderezos/agregar",
     },
 };

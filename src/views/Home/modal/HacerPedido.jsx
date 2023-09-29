@@ -77,12 +77,6 @@ function HacerPedido({ producto }) {
         }
     }, [producto]);
 
-    useEffect(() => {
-        console.log('adicionales', adicionales)
-        console.log('arrAdicioPredeter', producto?.adicionalesPredeterminados)
-    }, [producto])
-
-
     return (
         <form method="post" onSubmit={handlePedido}>
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -130,7 +124,7 @@ function HacerPedido({ producto }) {
                                             type="checkbox"
                                             role="switch"
                                             defaultChecked={
-                                                producto?.adicionalesPredeterminados?.some((item) => item.id === aderezo.id)
+                                                producto?.aderezosPredeterminados?.some((item) => item.id === aderezo.id)
                                             }
                                             onChange={(e) => handleCheckboxChangeAderezos(e)}
                                             id={aderezo.nombre}

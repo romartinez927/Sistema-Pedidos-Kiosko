@@ -12,6 +12,9 @@ import AltaProducto from './views/dashboard/productos/agregar/page';
 import ListaAdicionales from './views/dashboard/adicionales/lista/page';
 import EditarAdicional from './views/dashboard/adicionales/editar/page';
 import AltaAdicional from './views/dashboard/adicionales/agregar/page';
+import ListaAderezos from './views/dashboard/aderezos/lista/page';
+import AltaAderezo from './views/dashboard/aderezos/agregar/page';
+import EditarAderezo from './views/dashboard/aderezos/editar/page';
 // const socket = io.connect(`${import.meta.env.VITE_API_URL}`)
 
 
@@ -24,6 +27,9 @@ function App() {
                 <Route path="/" element={<ProductosContainer />} />
                 <Route path="/pedidos" element={<PedidosContainer />} />
                 <Route path="/prueba" element={<Prueba />} />
+                <Route path="/aderezos" element={<ListaAderezos />} />
+                <Route path="/aderezos/agregar" element={<AltaAderezo />} />
+                <Route path="/aderezos/editar/:aderezoId" element={<EditarAderezo />} />
                 <Route path="/adicionales" element={<ListaAdicionales />} />
                 <Route path="/adicionales/agregar" element={<AltaAdicional />} />
                 <Route path="/adicionales/editar/:adicionalId" element={<EditarAdicional />} />
