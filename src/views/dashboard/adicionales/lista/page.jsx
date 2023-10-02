@@ -8,6 +8,13 @@ import { deleteAdicional } from '../../../../../api/adicionales/deleteAdicional'
 const ListaAdicionales = () => {
     const [adicionales, setAdicionales] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
+    const handleEliminarAdicional = (id) => {
+        const confirmacion = window.confirm('¿Estás seguro de que quieres eliminar este adicional?');
+
+        if (confirmacion) {
+            deleteAdicional(id)
+        }
+    };
     useEffect(() => {
         async function fetchAdicionales() {
             try {
@@ -20,20 +27,15 @@ const ListaAdicionales = () => {
             }
         }
         fetchAdicionales();
-    }, []);
+    }, [handleEliminarAdicional]);
+    
     const navigate = useNavigate();
 
     const handleClick = () => {
         navigate(`${siteConfig.links.adicionales_agregar}`);
     };
 
-    const handleEliminarAdicional = (id) => {
-        const confirmacion = window.confirm('¿Estás seguro de que quieres eliminar este adicional?');
-
-        if (confirmacion) {
-            deleteAdicional(id)
-        }
-    };
+    
     return (
         <main>
             <h1 className='text-center'>Listado de Adicionales</h1>

@@ -8,6 +8,14 @@ import { deleteProducto } from '../../../../../api/productos/deleteProducto';
 const ListaProductos = () => {
     const [productos, setProductos] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
+
+    const handleEliminarProducto = (id) => {
+        const confirmacion = window.confirm('¿Estás seguro de que quieres eliminar este producto?');
+
+        if (confirmacion) {
+            deleteProducto(id)
+        }
+    };
     useEffect(() => {
         async function fetchProductos() {
             try {
@@ -20,20 +28,14 @@ const ListaProductos = () => {
             }
         }
         fetchProductos();
-    }, []);
+    }, [handleEliminarProducto]);
     const navigate = useNavigate();
 
     const handleClick = () => {
         navigate(`${siteConfig.links.productos_agregar}`);
     };
 
-    const handleEliminarProducto = (id) => {
-        const confirmacion = window.confirm('¿Estás seguro de que quieres eliminar este producto?');
-
-        if (confirmacion) {
-            deleteProducto(id)
-        }
-    };
+   
     return (
         <main>
             <h1 className='text-center'>Listado de Productos</h1>

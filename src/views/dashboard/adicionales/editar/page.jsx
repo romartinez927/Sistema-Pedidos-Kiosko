@@ -34,6 +34,7 @@ const EditarAdicional = () => {
         e.preventDefault();
         try {
             await updateAdicional(adicionalId, adicional);
+            alert("Adicional guardado exitosamente")
         } catch (error) {
             // Maneja cualquier error que pueda ocurrir durante la solicitud.
             console.error('Error al crear el adicional', error);

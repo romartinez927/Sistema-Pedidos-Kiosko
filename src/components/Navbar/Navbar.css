@@ -1,0 +1,24 @@
+.nav-link {
+    color: #434343;
+    padding: 10px 20px !important;
+    margin: 0 5px;
+    font-weight: 500;
+    border-radius: 10px;
+}
+
+.nav-link:hover {
+    border: 1px solid #c2c2c2;
+    transition: .7s all ease-out
+}
+
+.nav-link.active {
+    border: 1px solid #c2c2c2;
+    border-radius: 10px;
+}
+
+.nav-link.active:hover {
+    background-color: #434343;
+    color: #fff;
+    transition: .3s all ease
+}
+

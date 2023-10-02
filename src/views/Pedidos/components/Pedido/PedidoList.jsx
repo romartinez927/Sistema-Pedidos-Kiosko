@@ -3,38 +3,27 @@ import "./PedidoList.css"
 import { setEstadoPedido } from '../../../../../api/pedidos/setEstadoPedido';
 
 function PedidoList( {pedido, socket} ) {
-
-  const [data, setData] = useState({
-    nombre: pedido?.product_id?.nombre,
-    estado: pedido?.estado,
-    cantidad: pedido?.cantidad,
-    adicionales: pedido?.adicionales,
-    aderezos: pedido?.aderezos,
-    nota: pedido?.nota ? pedido.nota : ""
-  });
+  const { titulo, cantidad, adicionales, aderezos, nota } = pedido;
   const [estado, setEstado] = useState(pedido.estado)
-
 
   const handleEstado = async(pedido) => {
     const nuevoEstado = await setEstadoPedido(pedido._id)
     setEstado(nuevoEstado.estado)
     if (nuevoEstado) {
-      const newEstado = data.estado
+      const newEstado = estado
       socket.emit("send_message", { message: newEstado})
     }
   }
 
-
-
   return (
     <div className="card-pedidos p-4 m-2 border rounded">
       {/* PEDIDO */}
-      <h3>{data.nombre}</h3>
-      <p>Cantidad: {data.cantidad}</p>
+      <h3>{titulo}</h3>
+      <p>Cantidad: {cantidad}</p>
       <div>
         <h5>Adicionales</h5>
         {
-          data.adicionales.map((adicional, index) => (
+          adicionales.map((adicional, index) => (
             <p key={index}>{adicional.nombre}</p>
           ))
         }
@@ -42,16 +31,16 @@ function PedidoList( {pedido, socket} ) {
       <div>
         <h5>Aderezos</h5>
         {
-          data.aderezos.map((aderezo, index) => (
+          aderezos.map((aderezo, index) => (
             <p key={index}>{aderezo.nombre}</p>
           ))
         }
       </div>
       {
-        data.nota !== "" ? (
+        nota !== "" ? (
           <div>
             <h5>Nota</h5>
-            <p>{data.nota}</p>
+            <p>{nota}</p>
           </div>
         ) :
         <></>

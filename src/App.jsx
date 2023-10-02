@@ -15,29 +15,35 @@ import AltaAdicional from './views/dashboard/adicionales/agregar/page';
 import ListaAderezos from './views/dashboard/aderezos/lista/page';
 import AltaAderezo from './views/dashboard/aderezos/agregar/page';
 import EditarAderezo from './views/dashboard/aderezos/editar/page';
+import Login from './views/Login/components/Login';
+import { UserProvider } from '../context/UserContext';
+import { ProtectedRoute } from './components/routers/ProtectedRouter';
 // const socket = io.connect(`${import.meta.env.VITE_API_URL}`)
-
 
 function App() {
 
     return (
-        <BrowserRouter>
-            <Navbar />
-            <Routes>
-                <Route path="/" element={<ProductosContainer />} />
-                <Route path="/pedidos" element={<PedidosContainer />} />
-                <Route path="/prueba" element={<Prueba />} />
-                <Route path="/aderezos" element={<ListaAderezos />} />
-                <Route path="/aderezos/agregar" element={<AltaAderezo />} />
-                <Route path="/aderezos/editar/:aderezoId" element={<EditarAderezo />} />
-                <Route path="/adicionales" element={<ListaAdicionales />} />
-                <Route path="/adicionales/agregar" element={<AltaAdicional />} />
-                <Route path="/adicionales/editar/:adicionalId" element={<EditarAdicional />} />
-                <Route path="/productos" element={<ListaProductos />} />
-                <Route path="/productos/agregar" element={<AltaProducto />} />
-                <Route path="/productos/editar/:productoId" element={<EditarProducto />} />
-            </Routes>
-        </BrowserRouter>
+        <UserProvider>
+            <BrowserRouter>
+                <Routes>
+                    <Route element={<ProtectedRoute/>}>
+                        <Route path="" element={<ProductosContainer />} />
+                        <Route path="/pedidos" element={<PedidosContainer />} />
+                        <Route path="/prueba" element={<Prueba />} />
+                        <Route path="/aderezos" element={<ListaAderezos />} />
+                        <Route path="/aderezos/agregar" element={<AltaAderezo />} />
+                        <Route path="/aderezos/editar/:aderezoId" element={<EditarAderezo />} />
+                        <Route path="/adicionales" element={<ListaAdicionales />} />
+                        <Route path="/adicionales/agregar" element={<AltaAdicional />} />
+                        <Route path="/adicionales/editar/:adicionalId" element={<EditarAdicional />} />
+                        <Route path="/productos" element={<ListaProductos />} />
+                        <Route path="/productos/agregar" element={<AltaProducto />} />
+                        <Route path="/productos/editar/:productoId" element={<EditarProducto />} />
+                    </Route>
+                    <Route path="/login" element={<Login />} />
+                </Routes>
+            </BrowserRouter>
+        </UserProvider>
     )
 }
 

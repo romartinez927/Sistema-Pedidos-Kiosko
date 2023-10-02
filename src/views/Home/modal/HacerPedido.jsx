@@ -13,11 +13,12 @@ function HacerPedido({ producto }) {
     const [arrayAdicionales, setArrayAdicionales] = useState([])
     const [arrayAderezos, setArrayAderezos] = useState([])
     const [formData, setFormData] = useState({
+        titulo: "",
         cantidad: 1,
         adicionales: arrayAdicionales,
         aderezos: arrayAderezos,
         product_id: "",
-        nota: ""
+        nota: "",
     })
 
     const handleChange = (event) => {
@@ -61,6 +62,7 @@ function HacerPedido({ producto }) {
     const enviarPedido = (formData) => {
         setNuevoPedido(formData)
         socket.emit("send_prueba", { message: "nuevo pedido" })
+        alert("Pedido creado exitosamente")
     };
 
     const handlePedido = (e) => {
@@ -72,7 +74,8 @@ function HacerPedido({ producto }) {
         if (producto && producto.id) {
             setFormData(prevFormData => ({
                 ...prevFormData,
-                product_id: producto.id
+                product_id: producto.id,
+                titulo: producto.nombre
             }));
         }
     }, [producto]);
@@ -87,7 +90,6 @@ function HacerPedido({ producto }) {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                            <input type="text" hidden className="form-control" name="product_id" id="product_id" />
                             {/* CANTIDAD */}
                             <h5>Cantidad</h5>
                             <div className="mb-3">

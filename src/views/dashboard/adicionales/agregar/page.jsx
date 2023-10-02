@@ -17,6 +17,7 @@ function AltaAdicional() {
         e.preventDefault();
         try {
             await setNuevoAdicional(adicional);
+            alert("Adicional guardado exitosamente")
         } catch (error) {
             // Maneja cualquier error que pueda ocurrir durante la solicitud.
             console.error('Error al crear el adicional', error);

@@ -25,17 +25,35 @@ export const siteConfig = {
     ],
     navMenuItems: [
         {
-            label: "Inicio",
+            label: "Productos",
             href: "/",
         },
         {
             label: "Pedidos",
             href: "/pedidos",
         },
-        {
-            label: "Prueba",
-            href: "/prueba",
-        },
+        // {
+        //     label: "Prueba",
+        //     href: "/prueba",
+        // },
+        // {
+        //     label: "Productos",
+        //     href: "/productos",
+        // },
+        // {
+        //     label: "Adicionales",
+        //     href: "/adicionales",
+        // },
+        // {
+        //     label: "Aderezos",
+        //     href: "/aderezos",
+        // },
+    ],
+    configuradorItems: [
+        // {
+        //     label: "Prueba",
+        //     href: "/prueba",
+        // },
         {
             label: "Productos",
             href: "/productos",

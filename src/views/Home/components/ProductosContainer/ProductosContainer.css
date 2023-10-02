@@ -1,0 +1,11 @@
+.btn-productos {
+    color: #434343;
+    background-color: #fff;
+    border: 1px solid #c2c2c2
+}
+
+.btn-productos:hover {
+    background-color: #434343;
+    color: #fff;
+    transition: .3s all ease
+}

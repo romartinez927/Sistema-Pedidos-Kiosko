@@ -18,12 +18,16 @@ function AltaAderezo() {
         e.preventDefault();
         try {
             await setNuevoAderezo(aderezo);
+            alert("Aderezo guardado exitosamente")
         } catch (error) {
             // Maneja cualquier error que pueda ocurrir durante la solicitud.
             console.error('Error al crear el aderezo', error);
         }
     };
 
+
+
+    
     return (
         <main>
             <div className='container text-center'>

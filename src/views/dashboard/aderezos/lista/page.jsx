@@ -8,6 +8,14 @@ import { deleteAderezo } from '../../../../../api/aderezos/deleteAderezo';
 const ListaAderezos = () => {
     const [aderezos, setAderezos] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
+    const handleEliminarAderezo = (id) => {
+        const confirmacion = window.confirm('¿Estás seguro de que quieres eliminar este aderezo?');
+
+        if (confirmacion) {
+            deleteAderezo(id)
+        }
+    };
+    
     useEffect(() => {
         async function fetchAderezos() {
             try {
@@ -20,20 +28,14 @@ const ListaAderezos = () => {
             }
         }
         fetchAderezos();
-    }, []);
+    }, [handleEliminarAderezo]);
+
     const navigate = useNavigate();
 
     const handleClick = () => {
         navigate(`${siteConfig.links.aderezos_agregar}`);
     };
 
-    const handleEliminarAderezo = (id) => {
-        const confirmacion = window.confirm('¿Estás seguro de que quieres eliminar este aderezo?');
-
-        if (confirmacion) {
-            deleteAderezo(id)
-        }
-    };
     return (
         <main>
             <h1 className='text-center'>Listado de Aderezos</h1>

@@ -34,6 +34,7 @@ const EditarAderezo = () => {
         e.preventDefault();
         try {
             await updateAderezo(aderezoId, aderezo);
+            alert("Aderezo guardado exitosamente")
         } catch (error) {
             // Maneja cualquier error que pueda ocurrir durante la solicitud.
             console.error('Error al crear el aderezo', error);

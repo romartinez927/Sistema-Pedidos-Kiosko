@@ -42,6 +42,7 @@ function PedidosContainer() {
           <button onClick={() => setFiltroEstado('preparando')}>En curso</button>
           <button onClick={() => setFiltroEstado('finalizado')}>Finalizados</button>
         </div>
+        <div className="container-fluid">
         <div className='d-flex justify-content-center flex-wrap'>
         {
             pedidosFiltrados.map((pedido, index) => (
@@ -52,6 +53,7 @@ function PedidosContainer() {
             />
             ))
         }
+        </div>
         </div>
     </main>
   )
