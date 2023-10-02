@@ -1,0 +1,12 @@
+.btn-contador {
+    all: unset;
+
+}
+
+.btn-contador-container {
+    border-radius: 1.4em;
+    border-style: solid;
+    border-width: .1em;
+    border-color: lightslategray
+
+}

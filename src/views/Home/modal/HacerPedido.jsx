@@ -6,20 +6,30 @@ import { getAdicionales } from '../../../../api/adicionales/getAdicionales'
 import { setNuevoPedido } from '../../../../api/pedidos/setNuevoPedido'
 import io from "socket.io-client"
 const socket = io.connect(`${import.meta.env.VITE_API_SOCKET}`)
+import "./hacerPedido.css"
 
 function HacerPedido({ producto }) {
     const [adicionales, setAdicionales] = useState(null)
     const [aderezos, setAderezos] = useState(null)
     const [arrayAdicionales, setArrayAdicionales] = useState([])
     const [arrayAderezos, setArrayAderezos] = useState([])
+    const [cantidad, setCantidad] = useState(1)
     const [formData, setFormData] = useState({
         titulo: "",
-        cantidad: 1,
+        cantidad: cantidad,
         adicionales: arrayAdicionales,
         aderezos: arrayAderezos,
         product_id: "",
         nota: "",
     })
+ 
+    function handleAdd() {
+        setCantidad(cantidad + 1)
+    }
+
+    function handleSubstract() {
+        setCantidad(cantidad - 1)
+    }
 
     const handleChange = (event) => {
         const { name, value } = event.target
@@ -91,10 +101,18 @@ function HacerPedido({ producto }) {
                         </div>
                         <div className="modal-body">
                             {/* CANTIDAD */}
-                            <h5>Cantidad</h5>
-                            <div className="mb-3">
-                                <input type="number" className="form-control" onChange={handleChange} name="cantidad" id="cantidad" value={formData?.cantidad} />
+                            <div className="d-flex justify-content-between mb-2">
+                                <h5>Unidades</h5>
+                                <div class="col-3 p-1 d-flex justify-content-center my-auto btn-contador-container">
+                                    <button class="btn-contador" disabled={cantidad === 0} onClick={handleSubstract}>-</button>
+                                    <p class="px-3 my-auto">{cantidad}</p>
+                                    <button class="btn-contador" onClick={handleAdd}>+</button>
+                                </div>
                             </div>
+                            {/* <div className="mb-3">
+                                <input type="number" className="form-control" onChange={handleChange} name="cantidad" id="cantidad" value={formData?.cantidad} />
+                                
+                            </div> */}
 
                             {/* ADICIONALES */}
                             <h5>Adicionales</h5>
@@ -148,7 +166,7 @@ function HacerPedido({ producto }) {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Enviar Pedido</button>
+                            <button type="submit" className="btn btn-primary" data-bs-dismiss="modal" >Enviar Pedido</button>
                         </div>
                     </div>
                 </div>

@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { login } from '../../../../api/login/login'
 import { UserContext } from '../../../../context/UserContext'
 import { useNavigate } from 'react-router-dom'
+import "./login.css"
 
 function Login() {
     let navigate = useNavigate()
@@ -29,25 +30,21 @@ function Login() {
     }
 
     return (
-        <div>
-            <h1>Login</h1>
-
-            <form method="post" id="formLogin" onSubmit={handleLogin}>
-                <div>
+        <div className="d-flex justify-content-center align-items-center vh-100">
+            <form method="post" id="formLogin" className="form-login" onSubmit={handleLogin}>
+                <h2 className='text-center'>Iniciar Sesión</h2>
+                <div className='d-flex flex-column gap-1 my-2'>
                     <label htmlFor="input_email">Email</label>
                     <input type="text" onChange={handleChange} name="email" placeholder="email" id="input_email" />
                 </div>
-                <div>
-                    <label htmlFor="input_password">Password</label>
+                <div className='d-flex flex-column gap-1 my-2'>
+                    <label htmlFor="input_password">Contraseña</label>
                     <input type="password" onChange={handleChange} name="password" placeholder="Password" id="input_password" />
                 </div>
-                <button type="submit">Login</button>
+                <div>
+                    <button type="submit" className='btn btn-primary my-2'>Login</button>
+                </div>
             </form>
-            <br />
-            <div>
-                <p>¿Olvidaste tu contraseña?</p>
-                <button id="resetPassword">Restablecer contraseña</button>
-            </div>
         </div>
     )
 }
