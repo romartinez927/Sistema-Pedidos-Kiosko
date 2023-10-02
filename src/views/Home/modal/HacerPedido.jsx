@@ -25,10 +25,12 @@ function HacerPedido({ producto }) {
  
     function handleAdd() {
         setCantidad(cantidad + 1)
+        setFormData({ ...formData, cantidad: cantidad})
     }
 
     function handleSubstract() {
         setCantidad(cantidad - 1)
+        setFormData({ ...formData, cantidad: cantidad})
     }
 
     const handleChange = (event) => {
@@ -104,15 +106,11 @@ function HacerPedido({ producto }) {
                             <div className="d-flex justify-content-between mb-2">
                                 <h5>Unidades</h5>
                                 <div class="col-3 p-1 d-flex justify-content-center my-auto btn-contador-container">
-                                    <button class="btn-contador" disabled={cantidad === 0} onClick={handleSubstract}>-</button>
+                                    <button class="btn-contador" type="button" disabled={cantidad === 0} onClick={handleSubstract}>-</button>
                                     <p class="px-3 my-auto">{cantidad}</p>
-                                    <button class="btn-contador" onClick={handleAdd}>+</button>
+                                    <button class="btn-contador" type="button" onClick={handleAdd}>+</button>
                                 </div>
                             </div>
-                            {/* <div className="mb-3">
-                                <input type="number" className="form-control" onChange={handleChange} name="cantidad" id="cantidad" value={formData?.cantidad} />
-                                
-                            </div> */}
 
                             {/* ADICIONALES */}
                             <h5>Adicionales</h5>
