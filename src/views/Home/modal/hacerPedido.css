@@ -8,5 +8,32 @@
     border-style: solid;
     border-width: .1em;
     border-color: lightslategray
+}
 
+.adicionales-container {
+    padding: 12px 20px;
+    margin: 12px 10px;
+    border-radius: 6px;
+    background: rgb(255, 255, 255);
+    box-shadow: rgba(181, 129, 108, 0.8) 0px 8px 34px -25px;
+}
+
+.btn-adicionales {
+    height: auto;
+    width: auto;
+    border-radius: 50px;
+    background: rgb(234, 227, 227);
+    border: rgb(234, 227, 227);
+    padding: 10px 20px;
+    font-size: 12px;
+}
+
+.btn-adicionales:hover {
+    background-color: #434343;
+    color: #fff;
+    transition: .3s all ease
+}
+
+.modal-content {
+    background-color: #f9f6f4
 }

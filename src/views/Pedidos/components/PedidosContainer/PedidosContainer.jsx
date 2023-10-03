@@ -35,25 +35,24 @@ function PedidosContainer() {
   return (
     <main>
         {/* LISTADO DE PEDIDOS */}
-        <h1 className='text-center'>Listado de Pedidos</h1>
-        <div className="d-flex justify-content-center gap-3">
+        <div className="d-flex justify-content-center gap-3 mt-4">
           <button onClick={() => setFiltroEstado('todos')}>Todos</button>
           <button onClick={() => setFiltroEstado('empezar preparacion')}>Pendientes</button>
           <button onClick={() => setFiltroEstado('preparando')}>En curso</button>
           <button onClick={() => setFiltroEstado('finalizado')}>Finalizados</button>
         </div>
         <div className="container-fluid">
-        <div className='d-flex justify-content-center flex-wrap'>
-        {
-            pedidosFiltrados.map((pedido, index) => (
-            <PedidoList 
-              key={index} 
-              pedido={pedido} 
-              socket={socket}
-            />
-            ))
-        }
-        </div>
+          <div className='d-flex justify-content-center flex-wrap'>
+          {
+              pedidosFiltrados.map((pedido, index) => (
+              <PedidoList 
+                key={index} 
+                pedido={pedido} 
+                socket={socket}
+              />
+              ))
+          }
+          </div>
         </div>
     </main>
   )

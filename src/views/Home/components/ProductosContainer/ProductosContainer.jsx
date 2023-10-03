@@ -26,20 +26,21 @@ function ProductosContainer() {
     <div className='container mt-5'>
       {/* PRODUCTOS */}
       {/* <h1 className='text-center'>Lista de Productos</h1> */}
+
       <div className='row d-flex mx-auto flex-wrap mt-5'>
         {productos.map((producto, index) => (
-           <div className='col-md-3 mb-4' key={index}>
-           <button
-             data-bs-toggle="modal"
-             data-bs-target="#exampleModal"
-             className='btn btn-productos btn-lg btn-block custom-button w-100 py-4 fw-semibold'
-             onClick={() => handleProductClick(producto)}>
-             {producto.nombre}
-           </button>
-         </div>
+          <div className='col-md-3 mb-4' key={index}>
+            <button
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModalToggle"
+              className='btn btn-productos btn-lg btn-block custom-button w-100 py-4 fw-semibold'
+              onClick={() => handleProductClick(producto)}>
+              {producto.nombre}
+            </button>
+          </div>
         ))}
       </div>
-
+  
       {/* MODAL PARA HACER PEDIDO */}
       <HacerPedido producto={selectedProduct} />
     </div>

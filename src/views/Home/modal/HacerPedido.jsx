@@ -22,15 +22,16 @@ function HacerPedido({ producto }) {
         product_id: "",
         nota: "",
     })
- 
+
+    console.log(arrayAdicionales)
     function handleAdd() {
         setCantidad(cantidad + 1)
-        setFormData({ ...formData, cantidad: cantidad})
+        setFormData({ ...formData, cantidad: cantidad })
     }
 
     function handleSubstract() {
         setCantidad(cantidad - 1)
-        setFormData({ ...formData, cantidad: cantidad})
+        setFormData({ ...formData, cantidad: cantidad })
     }
 
     const handleChange = (event) => {
@@ -94,27 +95,82 @@ function HacerPedido({ producto }) {
 
     return (
         <form method="post" onSubmit={handlePedido}>
-            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="exampleModalLabel">{producto?.nombre}</h1>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5 fw-semibold" id="exampleModalToggleLabel">{producto?.nombre}</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div className="modal-body">
+                        <div class="modal-body">
                             {/* CANTIDAD */}
-                            <div className="d-flex justify-content-between mb-2">
-                                <h5>Unidades</h5>
-                                <div class="col-3 p-1 d-flex justify-content-center my-auto btn-contador-container">
-                                    <button class="btn-contador" type="button" disabled={cantidad === 0} onClick={handleSubstract}>-</button>
-                                    <p class="px-3 my-auto">{cantidad}</p>
-                                    <button class="btn-contador" type="button" onClick={handleAdd}>+</button>
+                            <div className="adicionales-container">
+                                <div className="py-2 d-flex justify-content-between">
+                                    <h5 className='my-auto'>Unidades</h5>
+                                    <div className="col-3 p-1 d-flex justify-content-center my-auto btn-contador-container">
+                                        <button className="btn-contador" type="button" disabled={cantidad === 0} onClick={handleSubstract}>-</button>
+                                        <p className="px-3 my-auto">{cantidad}</p>
+                                        <button className="btn-contador" type="button" onClick={handleAdd}>+</button>
+                                    </div>
                                 </div>
                             </div>
 
                             {/* ADICIONALES */}
-                            <h5>Adicionales</h5>
-                            {
+                            <div className='adicionales-container'>
+                               <div className='py-2 d-flex justify-content-between align-items-center'>
+                                    <div>
+                                        <h5 className='my-auto'>Adicionales</h5>
+                                        {formData.adicionales && formData.adicionales.map(adicional => (
+                                            <span key={adicional.id}>{adicional.nombre}, </span>
+                                        ))}
+                                    </div>
+                                    <button type="button" class="btn-adicionales" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Seleccionar</button>
+                               </div>
+                            </div>
+
+                            {/* ADEREZOS */}
+                            <div className="adicionales-container">
+                                <div className='py-2 d-flex justify-content-between align-items-center'>
+                                    <div>
+                                        <h5 className='my-auto'>Aderezos</h5>
+                                        {formData.aderezos && formData.aderezos.map(aderezo => (
+                                            <span key={aderezo.id}>{aderezo.nombre}, </span>
+                                        ))}
+                                    </div>
+                                    <button type="button" class="btn-adicionales" data-bs-target="#exampleModalToggle3" data-bs-toggle="modal">Seleccionar</button>
+                                </div>
+                            </div>
+
+                            {/* NOTA */}
+                            <div className="adicionales-container">
+                                <div className='py-2 d-flex flex-column'>
+                                    <label htmlFor="nota" className='fw-semibold'>Notas para este pedido</label>
+                                    <textarea
+                                        name="nota"
+                                        value={formData.nota}
+                                        onChange={handleChange}
+                                        className="mt-2"
+                                        placeholder="Escribe las instrucciones que necesites..."
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" className="btn btn-primary" data-bs-dismiss="modal" >Enviar Pedido</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Adicionales</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                         {
                                 adicionales && adicionales.map((adicional, index) => (
                                     <div key={index} className="form-check form-switch">
                                         <input
@@ -132,10 +188,22 @@ function HacerPedido({ producto }) {
                                     </div>
                                 ))
                             }
-
-                            {/* ADEREZOS */}
-                            <h5>Aderezos</h5>
-                            {
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="exampleModalToggle3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel3" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalToggleLabel3">Aderezos</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                        {
                                 aderezos && aderezos.map((aderezo, index) => (
                                     <div key={index} className="form-check form-switch">
                                         <input className="form-check-input"
@@ -153,18 +221,9 @@ function HacerPedido({ producto }) {
                                     </div>
                                 ))
                             }
-                            <div className='d-flex flex-column'>
-                                <label htmlFor="nota">Nota:</label>
-                                <textarea 
-                                    name="nota"
-                                    value={formData.nota}
-                                    onChange={handleChange}
-                                />
-                            </div>
                         </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" className="btn btn-primary" data-bs-dismiss="modal" >Enviar Pedido</button>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Guardar</button>
                         </div>
                     </div>
                 </div>

@@ -16,25 +16,28 @@ function PedidoList( {pedido, socket} ) {
   }
 
   return (
-    <div className="card-pedidos p-4 m-2 border rounded">
+    <div style={{ flex: '0 0 22%' }} className="d-flex flex-column justify-content-center card-pedidos p-4 m-2 border rounded bg-white">
       {/* PEDIDO */}
-      <h3>{titulo}</h3>
-      <p>Cantidad: {cantidad}</p>
+      <h4 className='text-start'>{titulo} ({cantidad}x)</h4>
       <div>
-        <h5>Adicionales</h5>
-        {
-          adicionales.map((adicional, index) => (
-            <p key={index}>{adicional.nombre}</p>
-          ))
-        }
+        <h5>{ adicionales.length > 0 && "Adicionales" }</h5>
+        <div className="chip">
+          {
+            adicionales.map((adicional, index) => (
+              <p key={index}>{adicional.nombre}</p>
+            ))
+          }
+        </div> 
       </div>
       <div>
-        <h5>Aderezos</h5>
-        {
-          aderezos.map((aderezo, index) => (
-            <p key={index}>{aderezo.nombre}</p>
-          ))
-        }
+        <h5>{ adicionales.length > 0 && "Aderezos" }</h5>
+        <div className='chip'>
+          {
+            aderezos.map((aderezo, index) => (
+              <p key={index}>{aderezo.nombre}</p>
+            ))
+          }
+        </div>
       </div>
       {
         nota !== "" ? (
@@ -45,7 +48,7 @@ function PedidoList( {pedido, socket} ) {
         ) :
         <></>
       }
-      <button className="btn btn-primary" onClick={() => handleEstado(pedido)}>{estado}</button>
+      <button className="btn btn-primary mt-1" onClick={() => handleEstado(pedido)}>{estado}</button>
     </div>
   )
 }

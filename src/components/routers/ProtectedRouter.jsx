@@ -10,7 +10,7 @@ export const ProtectedRoute = ({children, redirectTo="/login"}) => {
     return children ? children : 
     <>
         <Navbar/>
-        <div className='main-content col-12 col-xl overflow-scroll'> 
+        <div className='main-content col-12 col-xl'> 
             <Outlet /> 
         </div>
     </>
