@@ -48,7 +48,7 @@ function PedidoList( {pedido, socket} ) {
         ) :
         <></>
       }
-      <button className="btn btn-secondary mt-1" onClick={() => handleEstado(pedido)}>{estado}</button>
+      <button className="mt-1" onClick={() => handleEstado(pedido)}>{estado}</button>
     </div>
   )
 }
