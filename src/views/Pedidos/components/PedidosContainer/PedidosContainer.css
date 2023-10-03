@@ -1,0 +1,23 @@
+.nav-pills .nav-item .active{
+    background-color: #434343;
+    color: #fff;
+    transition: .6s all ease;
+
+}
+
+.nav-pills .nav-item .active:hover {
+    color: #434343;
+    background-color: #fff;
+    border: 1px solid #c2c2c2
+}
+
+.nav-pills .nav-item a:hover {
+    color: #434343;
+    background-color: #fff;
+    border: 1px solid #c2c2c2;
+    transition: .6s all ease;
+}
+
+.nav-pills .nav-item {
+    margin-inline: 10px
+}

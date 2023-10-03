@@ -23,7 +23,6 @@ function HacerPedido({ producto }) {
         nota: "",
     })
 
-    console.log(arrayAdicionales)
     function handleAdd() {
         setCantidad(cantidad + 1)
         setFormData({ ...formData, cantidad: cantidad })

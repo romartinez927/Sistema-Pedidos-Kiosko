@@ -32,9 +32,8 @@ function Login() {
     return (
         <div className="d-flex justify-content-center align-items-center vh-100">
             <form method="post" id="formLogin" className="form-login" onSubmit={handleLogin}>
-                <h2 className='text-center'>Iniciar Sesión</h2>
                 <div className='d-flex flex-column gap-1 my-2'>
-                    <label htmlFor="input_email">Email</label>
+                    <label htmlFor="input_email">Correo Electrónico</label>
                     <input type="text" onChange={handleChange} name="email" placeholder="email" id="input_email" />
                 </div>
                 <div className='d-flex flex-column gap-1 my-2'>
@@ -42,7 +41,7 @@ function Login() {
                     <input type="password" onChange={handleChange} name="password" placeholder="Password" id="input_password" />
                 </div>
                 <div>
-                    <button type="submit" className='btn btn-primary my-2'>Login</button>
+                    <button type="submit" className='btn btn-primary my-2'>Iniciar Sesión</button>
                 </div>
             </form>
         </div>
