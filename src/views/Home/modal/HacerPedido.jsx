@@ -5,7 +5,7 @@ import { getAderezos } from '../../../../api/aderezos/getAderezos'
 import { getAdicionales } from '../../../../api/adicionales/getAdicionales'
 import { setNuevoPedido } from '../../../../api/pedidos/setNuevoPedido'
 import io from "socket.io-client"
-// const socket = io.connect(`${import.meta.env.VITE_API_SOCKET}`)
+const socket = io.connect(`${import.meta.env.VITE_API_URL}`)
 import "./hacerPedido.css"
 
 function HacerPedido({ producto }) {
@@ -73,7 +73,7 @@ function HacerPedido({ producto }) {
 
     const enviarPedido = (formData) => {
         setNuevoPedido(formData)
-        // socket.emit("send_prueba", { message: "nuevo pedido" })
+        socket.emit("send_prueba", { message: "nuevo pedido" })
         alert("Pedido creado exitosamente")
     };
 

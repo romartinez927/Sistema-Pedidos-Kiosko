@@ -11,7 +11,7 @@ function PedidoList( {pedido, socket} ) {
     setEstado(nuevoEstado.estado)
     if (nuevoEstado) {
       const newEstado = estado
-      // socket.emit("send_message", { message: newEstado})
+      socket.emit("send_message", { message: newEstado})
     }
   }
 

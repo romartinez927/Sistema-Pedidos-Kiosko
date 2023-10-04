@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import PedidoList from '../Pedido/PedidoList';
 import io from "socket.io-client"
 import { getPedidos } from '../../../../../api/pedidos/getPedidos';
-// const socket = io.connect(`${import.meta.env.VITE_API_SOCKET}`)
+const socket = io.connect(`${import.meta.env.VITE_API_URL}`)
 import "./PedidosContainer.css"
 
 function PedidosContainer() {
@@ -15,17 +15,17 @@ function PedidosContainer() {
       try {
         const data = await getPedidos()
         setPedidos(data)
-        // socket.on("enviar_prueba", async (data) => {
-        //   const dataSocket = await getPedidos()
-        //   setPedidos(dataSocket)
-        // })
+        socket.on("enviar_prueba", async (data) => {
+          const dataSocket = await getPedidos()
+          setPedidos(dataSocket)
+        })
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     }
     fetchData()
-  // }, [socket]);
-  }, []);
+  }, [socket]);
+
 
   const pedidosFiltrados = pedidos.filter(pedido => {
     if (filtroEstado === 'todos') {
@@ -60,7 +60,7 @@ function PedidosContainer() {
               <PedidoList
                 key={index}
                 pedido={pedido}
-                // socket={socket}
+                socket={socket}
               />
             ))
           }
