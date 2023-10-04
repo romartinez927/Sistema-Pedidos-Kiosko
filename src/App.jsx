@@ -18,7 +18,7 @@ import EditarAderezo from './views/dashboard/aderezos/editar/page';
 import Login from './views/Login/components/Login';
 import { UserProvider } from '../context/UserContext';
 import { ProtectedRoute } from './components/routers/ProtectedRouter';
-const socket = io.connect(`${import.meta.env.VITE_API_URL}`)
+// const socket = io.connect(`${import.meta.env.VITE_API_URL}`)
 
 function App() {
 
