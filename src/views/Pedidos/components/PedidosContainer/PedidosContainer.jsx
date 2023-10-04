@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import PedidoList from '../Pedido/PedidoList';
-import io from "socket.io-client"
+// import io from "socket.io-client"
 import { getPedidos } from '../../../../../api/pedidos/getPedidos';
 import "./PedidosContainer.css"
 

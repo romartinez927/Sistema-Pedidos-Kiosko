@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import io from "socket.io-client"
+// import io from "socket.io-client"
 // const socket = io.connect('https://sistema-pedidos.onrender.com')
 
 function Prueba() {
