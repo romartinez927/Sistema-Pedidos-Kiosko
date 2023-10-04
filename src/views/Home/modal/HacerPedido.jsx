@@ -5,10 +5,10 @@ import { getAderezos } from '../../../../api/aderezos/getAderezos'
 import { getAdicionales } from '../../../../api/adicionales/getAdicionales'
 import { setNuevoPedido } from '../../../../api/pedidos/setNuevoPedido'
 import io from "socket.io-client"
-const socket = io.connect(`${import.meta.env.VITE_API_URL}`)
 import "./hacerPedido.css"
 
 function HacerPedido({ producto }) {
+    const socket = io.connect(`${import.meta.env.VITE_API_URL}`)
     const [adicionales, setAdicionales] = useState(null)
     const [aderezos, setAderezos] = useState(null)
     const [arrayAdicionales, setArrayAdicionales] = useState([])

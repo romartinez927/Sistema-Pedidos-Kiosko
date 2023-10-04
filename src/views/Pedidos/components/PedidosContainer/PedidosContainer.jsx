@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 import PedidoList from '../Pedido/PedidoList';
 import io from "socket.io-client"
 import { getPedidos } from '../../../../../api/pedidos/getPedidos';
-const socket = io.connect(`${import.meta.env.VITE_API_URL}`)
 import "./PedidosContainer.css"
 
 function PedidosContainer() {
+  const socket = io.connect(`${import.meta.env.VITE_API_URL}`)
   const [pedidos, setPedidos] = useState([]);
   const [filtroEstado, setFiltroEstado] = useState('todos'); // 'todos' es el valor inicial
 
@@ -15,7 +15,7 @@ function PedidosContainer() {
       try {
         const data = await getPedidos()
         setPedidos(data)
-        socket.on("enviar_prueba", async (data) => {
+        socket.on("enviar_prueba", async () => {
           const dataSocket = await getPedidos()
           setPedidos(dataSocket)
         })
