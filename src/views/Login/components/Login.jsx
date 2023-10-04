@@ -8,7 +8,7 @@ import "./login.css"
 
 function Login({redirectTo="/"}) {
     const {accessToken} = useContext(UserContext)
-    if(!accessToken && !localStorage.getItem('token'))
+    if(accessToken && localStorage.getItem('token'))
         return <Navigate to={redirectTo} />
 
         let navigate = useNavigate()
