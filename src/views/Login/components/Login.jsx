@@ -42,11 +42,11 @@ function Login() {
             <form method="post" id="formLogin" className="form-login" onSubmit={handleLogin}>
                 <div className='d-flex flex-column gap-1 my-2'>
                     <label htmlFor="input_email">Correo Electrónico</label>
-                    <input type="email" onChange={handleChange} name="email" placeholder="email" id="input_email" required autoComplete="email"/>
+                    <input type="email" onChange={handleChange} name="email" placeholder="Ingrese su e-mail..." id="input_email" required autoComplete="email"/>
                 </div>
                 <div className='d-flex flex-column gap-1 my-2'>
                     <label htmlFor="input_password">Contraseña</label>
-                    <input type="password" onChange={handleChange} name="password" placeholder="Password" id="input_password" required />
+                    <input type="password" onChange={handleChange} name="password" placeholder="Ingrese su contraseña..." id="input_password" required />
                 </div>
                 <div>
                 <button type="submit" className='btn btn-primary my-2' disabled={isLoading}>
