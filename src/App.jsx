@@ -7,7 +7,7 @@ import io from "socket.io-client"
 import ProductosContainer from './views/Home/components/ProductosContainer/ProductosContainer';
 import ListaProductos from './views/dashboard/productos/lista/page';
 import EditarProducto from './views/dashboard/productos/editar/page';
-const socket = io.connect(`${import.meta.env.VITE_API_SOCKET}`)
+// const socket = io.connect(`${import.meta.env.VITE_API_SOCKET}`)
 import AltaProducto from './views/dashboard/productos/agregar/page';
 import ListaAdicionales from './views/dashboard/adicionales/lista/page';
 import EditarAdicional from './views/dashboard/adicionales/editar/page';
@@ -18,7 +18,7 @@ import EditarAderezo from './views/dashboard/aderezos/editar/page';
 import Login from './views/Login/components/Login';
 import { UserProvider } from '../context/UserContext';
 import { ProtectedRoute } from './components/routers/ProtectedRouter';
-// const socket = io.connect(`${import.meta.env.VITE_API_URL}`)
+const socket = io.connect(`${import.meta.env.VITE_API_URL}`)
 
 function App() {
 
