@@ -6,7 +6,7 @@ import { getPedidos } from '../../../../../api/pedidos/getPedidos';
 import "./PedidosContainer.css"
 
 function PedidosContainer() {
-  const socket = io.connect('https://sistema-pedidos.onrender.com')
+  // const socket = io.connect('https://sistema-pedidos.onrender.com')
   const [pedidos, setPedidos] = useState([]);
   const [filtroEstado, setFiltroEstado] = useState('todos'); // 'todos' es el valor inicial
 
@@ -15,16 +15,17 @@ function PedidosContainer() {
       try {
         const data = await getPedidos()
         setPedidos(data)
-        socket.on("enviar_prueba", async () => {
-          const dataSocket = await getPedidos()
-          setPedidos(dataSocket)
-        })
+        // socket.on("enviar_prueba", async () => {
+        //   const dataSocket = await getPedidos()
+        //   setPedidos(dataSocket)
+        // })
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     }
     fetchData()
-  }, [socket]);
+  }, []);
+// }, [socket]);
 
 
   const pedidosFiltrados = pedidos.filter(pedido => {
@@ -60,7 +61,7 @@ function PedidosContainer() {
               <PedidoList
                 key={index}
                 pedido={pedido}
-                socket={socket}
+                // socket={socket}
               />
             ))
           }

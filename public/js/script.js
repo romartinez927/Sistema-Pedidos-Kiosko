@@ -1,1 +1,1 @@
-const socket = io('https://sistema-pedidos.onrender.com');
+// const socket = io('https://sistema-pedidos.onrender.com');

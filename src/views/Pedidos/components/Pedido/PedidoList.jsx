@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import "./PedidoList.css"
 import { setEstadoPedido } from '../../../../../api/pedidos/setEstadoPedido';
 
-function PedidoList( {pedido, socket} ) {
+function PedidoList( {pedido} ) {
   const { titulo, cantidad, adicionales, aderezos, nota } = pedido;
   const [estado, setEstado] = useState(pedido.estado)
 
@@ -11,7 +11,7 @@ function PedidoList( {pedido, socket} ) {
     setEstado(nuevoEstado.estado)
     if (nuevoEstado) {
       const newEstado = estado
-      socket.emit("send_message", { message: newEstado})
+      // socket.emit("send_message", { message: newEstado})
     }
   }
 

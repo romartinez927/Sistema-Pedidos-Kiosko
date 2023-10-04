@@ -8,7 +8,7 @@ import io from "socket.io-client"
 import "./hacerPedido.css"
 
 function HacerPedido({ producto }) {
-    const socket = io.connect('https://sistema-pedidos.onrender.com')
+    // const socket = io.connect('https://sistema-pedidos.onrender.com')
     const [adicionales, setAdicionales] = useState(null)
     const [aderezos, setAderezos] = useState(null)
     const [arrayAdicionales, setArrayAdicionales] = useState([])
@@ -71,11 +71,11 @@ function HacerPedido({ producto }) {
         fetchData()
     }, [])
 
-    const enviarPedido = (formData) => {
-        setNuevoPedido(formData)
-        socket.emit("send_prueba", { message: "nuevo pedido" })
-        alert("Pedido creado exitosamente")
-    };
+    // const enviarPedido = (formData) => {
+    //     setNuevoPedido(formData)
+    //     socket.emit("send_prueba", { message: "nuevo pedido" })
+    //     alert("Pedido creado exitosamente")
+    // };
 
     const handlePedido = (e) => {
         e.preventDefault();
