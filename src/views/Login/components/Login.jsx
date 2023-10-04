@@ -7,6 +7,7 @@ import "./login.css"
 
 function Login() {
     let navigate = useNavigate()
+    const [isLoading, setIsLoading] = useState(false);
     const [formData, setFormData] = useState({
         email: "",
         password: ""
@@ -20,28 +21,37 @@ function Login() {
     const enviarFormLogin = (formData) => login(formData)
 
     const handleLogin = async (e) => {
-        e.preventDefault();
-        let response = await enviarFormLogin(formData)
-        const token = response.data.token;
-        // Haz algo con el token (por ejemplo, guárdalo en localStorage)
-        localStorage.setItem('token', token);
-        setAccessToken(token)
-        navigate('/')
-    }
+        e.preventDefault()
+        setIsLoading(true) 
+      
+        try {
+          let response = await enviarFormLogin(formData)
+          const token = response.data.token
+          localStorage.setItem('token', token)
+          setAccessToken(token)
+          navigate('/')
+        } catch (error) {
+          console.error('Error al iniciar sesión:', error)
+        } finally {
+          setIsLoading(false)
+        }
+      }
 
     return (
         <div className="d-flex justify-content-center align-items-center vh-100">
             <form method="post" id="formLogin" className="form-login" onSubmit={handleLogin}>
                 <div className='d-flex flex-column gap-1 my-2'>
                     <label htmlFor="input_email">Correo Electrónico</label>
-                    <input type="text" onChange={handleChange} name="email" placeholder="email" id="input_email" />
+                    <input type="email" onChange={handleChange} name="email" placeholder="email" id="input_email" required />
                 </div>
                 <div className='d-flex flex-column gap-1 my-2'>
                     <label htmlFor="input_password">Contraseña</label>
-                    <input type="password" onChange={handleChange} name="password" placeholder="Password" id="input_password" />
+                    <input type="password" onChange={handleChange} name="password" placeholder="Password" id="input_password" required />
                 </div>
                 <div>
-                    <button type="submit" className='btn btn-primary my-2'>Iniciar Sesión</button>
+                <button type="submit" className='btn btn-primary my-2' disabled={isLoading}>
+                    {isLoading ? 'Enviando...' : 'Iniciar Sesión'}
+                </button>
                 </div>
             </form>
         </div>

@@ -39,18 +39,18 @@ function PedidosContainer() {
     <main>
       {/* LISTADO DE PEDIDOS */}
       <div className="d-flex justify-content-center gap-3 mt-4">
-        <ul class="nav nav-pills nav-fill">
-          <li class="nav-item">
-            <a class={filtroEstado == 'todos' ? "nav-link active" : "nav-link"} onClick={() => setFiltroEstado('todos')}>Todos</a>
+        <ul className="nav nav-pills nav-fill">
+          <li className="nav-item">
+            <a className={filtroEstado == 'todos' ? "nav-link active" : "nav-link"} onClick={() => setFiltroEstado('todos')}>Todos</a>
           </li>
-          <li class="nav-item">
-            <a class={filtroEstado == 'empezar preparacion' ? "nav-link active" : "nav-link"} onClick={() => setFiltroEstado('empezar preparacion')}>Pendientes</a>
+          <li className="nav-item">
+            <a className={filtroEstado == 'empezar preparacion' ? "nav-link active" : "nav-link"} onClick={() => setFiltroEstado('empezar preparacion')}>Pendientes</a>
           </li>
-          <li class="nav-item">
-            <a class={filtroEstado == 'preparando' ? "nav-link active" : "nav-link"} onClick={() => setFiltroEstado('preparando')}>En curso</a>
+          <li className="nav-item">
+            <a className={filtroEstado == 'preparando' ? "nav-link active" : "nav-link"} onClick={() => setFiltroEstado('preparando')}>En curso</a>
           </li>
-          <li class="nav-item">
-            <a class={filtroEstado == 'finalizado' ? "nav-link active" : "nav-link"} onClick={() => setFiltroEstado('finalizado')}>Finalizados</a>
+          <li className="nav-item">
+            <a className={filtroEstado == 'finalizado' ? "nav-link active" : "nav-link"} onClick={() => setFiltroEstado('finalizado')}>Finalizados</a>
           </li>
         </ul>
       </div>
