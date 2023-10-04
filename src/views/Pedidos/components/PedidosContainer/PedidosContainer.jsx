@@ -6,7 +6,7 @@ import { getPedidos } from '../../../../../api/pedidos/getPedidos';
 import "./PedidosContainer.css"
 
 function PedidosContainer() {
-  const socket = io.connect(`${import.meta.env.VITE_API_URL}`)
+  const socket = io.connect('https://sistema-pedidos.onrender.com')
   const [pedidos, setPedidos] = useState([]);
   const [filtroEstado, setFiltroEstado] = useState('todos'); // 'todos' es el valor inicial
 

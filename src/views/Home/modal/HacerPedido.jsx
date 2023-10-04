@@ -8,7 +8,7 @@ import io from "socket.io-client"
 import "./hacerPedido.css"
 
 function HacerPedido({ producto }) {
-    const socket = io.connect(`${import.meta.env.VITE_API_URL}`)
+    const socket = io.connect('https://sistema-pedidos.onrender.com')
     const [adicionales, setAdicionales] = useState(null)
     const [aderezos, setAderezos] = useState(null)
     const [arrayAdicionales, setArrayAdicionales] = useState([])
