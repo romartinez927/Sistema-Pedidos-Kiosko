@@ -5,6 +5,7 @@ import { Navigate } from "react-router-dom"
 import { UserContext } from '../../../../context/UserContext'
 import { useNavigate } from 'react-router-dom'
 import "./login.css"
+import iconLogo from '../../../icons/logo.svg'
 
 function Login({redirectTo="/"}) {
     const {accessToken} = useContext(UserContext)
@@ -43,20 +44,21 @@ function Login({redirectTo="/"}) {
           }
    
     return (
-        <div className="d-flex justify-content-center align-items-center vh-100">
-            <form method="post" id="formLogin" className="form-login" onSubmit={handleLogin}>
+        <div className="d-flex flex-column justify-content-center align-items-center vh-100">
+            <img src={iconLogo} alt="Logo" width={80} />
+            <form method="post" id="formLogin" className="form-login pt-3" onSubmit={handleLogin}>
                 <div className='d-flex flex-column gap-1 my-2'>
                     <label htmlFor="input_email">Correo Electrónico</label>
                     <input type="email" onChange={handleChange} name="email" placeholder="Ingrese su e-mail..." id="input_email" required autoComplete="email"/>
                 </div>
-                <div className='d-flex flex-column gap-1 my-2'>
+                <div className='d-flex flex-column gap-1 my-2 pt-2'>
                     <label htmlFor="input_password">Contraseña</label>
                     <input type="password" onChange={handleChange} name="password" placeholder="Ingrese su contraseña..." id="input_password" required />
                 </div>
-                <div>
-                <button type="submit" className='btn btn-primary my-2' disabled={isLoading}>
-                    {isLoading ? 'Enviando...' : 'Iniciar Sesión'}
-                </button>
+                <div className='d-flex justify-content-end pt-2'>
+                    <button type="submit" className='btn btn-primary my-2' disabled={isLoading}>
+                        {isLoading ? 'Enviando...' : 'INICIAR SESIÓN '}
+                    </button>
                 </div>
             </form>
         </div>
