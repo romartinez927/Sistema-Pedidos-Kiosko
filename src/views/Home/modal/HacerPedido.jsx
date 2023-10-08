@@ -24,14 +24,15 @@ function HacerPedido({ producto }) {
     })
 
     function handleAdd() {
-        setUnidades(unidades + 1)
-        setFormData({ ...formData, cantidad: unidades })
+        setFormData({ ...formData, cantidad: unidades +1 })
+        setUnidades(unidades+1)
     }
 
     console.log(formData)
     function handleSubstract() {
-        setUnidades(unidades - 1)
-        setFormData({ ...formData, cantidad: unidades })
+        setFormData({ ...formData, cantidad: unidades-1 })
+        setUnidades(unidades-1)
+
     }
 
     const handleChange = (event) => {
@@ -53,9 +54,21 @@ function HacerPedido({ producto }) {
         if (checked) {
             setArrayAdicionales([...arrayAdicionales, { id: value, nombre: id }]);
         } else {
-            setArrayAdicionales(arrayAdicionales.filter((item) => item !== value));
+            setArrayAdicionales(arrayAdicionales.filter((item) => item.id !== value)); // Corregido aquí
         }
-    };
+   
+        // Actualizar formData
+        setFormData({
+          ...formData,
+          adicionales: [...arrayAdicionales, { id: value, nombre: id }] // Puedes querer actualizar solo el arrayAdicionales aquí
+        });
+      };
+
+    useEffect(() => {
+        setArrayAdicionales(producto?.adicionalesPredeterminados)
+        setArrayAderezos(producto?.aderezosPredeterminados)
+        setFormData({ ...formData, adicionales: arrayAdicionales, aderezos: arrayAderezos })
+    }, [producto])
 
     useEffect(() => {
         setFormData({ ...formData, adicionales: arrayAdicionales, aderezos: arrayAderezos })
@@ -110,15 +123,20 @@ function HacerPedido({ producto }) {
                         </div>
                         <div className="modal-body">
                             {/* CANTIDAD */}
-                            <div className="adicionales-container">
+                            <div className="adicionales-container row">
+                               <div className="col-7">
                                 <div className="py-2 d-flex justify-content-between">
-                                    <h5 className='my-auto'>Unidades</h5>
-                                    <div className="col-3 p-1 d-flex justify-content-center my-auto btn-contador-container">
-                                        <button className="btn-contador" type="button" disabled={unidades === 0} onClick={handleSubstract}>-</button>
-                                        <p className="px-3 my-auto">{formData.cantidad}</p>
-                                        <button className="btn-contador" type="button" onClick={handleAdd}>+</button>
+                                        <h5 className='my-auto'>Unidades</h5>
+                                        <div className="col-6 p-1 d-flex justify-content-center my-auto btn-contador-container">
+                                            <button className="btn-contador" type="button" disabled={unidades === 0} onClick={handleSubstract}>-</button>
+                                            <p className="px-3 my-auto">{formData.cantidad}</p>
+                                            <button className="btn-contador" type="button" onClick={handleAdd}>+</button>
+                                        </div>
                                     </div>
-                                </div>
+                               </div>
+                               <div className="col-5 my-auto text-end">
+                                    <h5>${producto?.precio*formData.cantidad}</h5>
+                               </div>
                             </div>
 
                             {/* ADICIONALES */}
@@ -189,8 +207,10 @@ function HacerPedido({ producto }) {
                                             onChange={(e) => handleCheckboxChangeAdicionales(e)}
                                             id={adicional.nombre}
                                             value={adicional.id}
+                                          
                                         />
                                         <label className="form-check-label" htmlFor={adicional.nombre}>{adicional.nombre}</label>
+                                        <span> (${adicional.precio})</span>
                                     </div>
                                 ))
                             }

@@ -13,17 +13,20 @@ const EditarProducto = () => {
     const [arrayAdicionales, setArrayAdicionales] = useState([]);
     const [producto, setProducto] = useState({
         nombre: '',
-        estado: false,
-        adicionalesPredeterminados: arrayAdicionales,
-        aderezosPredeterminados: arrayAderezos
+        estado: true,
+        precio: '',
+        adicionalesPredeterminados: '',
+        aderezosPredeterminados: ''
     });
     const [isLoading, setIsLoading] = useState(true)
+
 
     useEffect(() => {
         async function fetchProducto() {
             try {
                 const data = await getProducto(productoId);
                 setProducto(data);
+                console.log(producto)
             } catch (error) {
                 console.error("Error fetching products:", error);
             } finally {
@@ -62,6 +65,7 @@ const EditarProducto = () => {
 
     const handleCheckboxChangeAderezos = (e) => {
         const { value, checked, name } = e.target;
+        setArrayAderezos(producto.aderezosPredeterminados)
         setArrayAderezos(prevArrayAderezos => {
             if (checked) {
                 return [...prevArrayAderezos, { id: value, nombre: name }];
@@ -69,10 +73,12 @@ const EditarProducto = () => {
                 return prevArrayAderezos.filter(item => item.id !== value);
             }
         });
+        console.log('Array Aderezos:', arrayAderezos);
     }
     
     const handleCheckboxChangeAdicionales = (e) => {
         const { value, checked, name } = e.target;
+        setArrayAdicionales(producto.adicionalesPredeterminados)
         setArrayAdicionales(prevArrayAdicionales => {
             if (checked) {
                 return [...prevArrayAdicionales, { id: value, nombre: name }];
@@ -80,12 +86,17 @@ const EditarProducto = () => {
                 return prevArrayAdicionales.filter(item => item.id !== value);
             }
         });
+        console.log('Array Adicionales:', arrayAdicionales);
     };
-
+    
     useEffect(() => {
-        setProducto({ ...producto, adicionalesPredeterminados: arrayAdicionales, aderezosPredeterminados: arrayAderezos })
-    }, [arrayAderezos, arrayAdicionales])
-
+        setProducto(prevProducto => ({
+            ...prevProducto,
+            aderezosPredeterminados: [...arrayAderezos],
+            adicionalesPredeterminados: [...arrayAdicionales]
+        }));
+    }, [arrayAderezos, arrayAdicionales]);
+    console.log(producto)
 
     return (
         <main>
@@ -107,6 +118,17 @@ const EditarProducto = () => {
                                     />
                                 </div>
                                 <div>
+                                    <label htmlFor="precio">Precio:</label>
+                                    <input
+                                        type="number"
+                                        id="precio"
+                                        name="precio"
+                                        value={producto?.precio}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                                <div>
                                     <label>
                                         Estado:
                                         <input
@@ -120,10 +142,10 @@ const EditarProducto = () => {
                                 <h2>Aderezos Predeterminados</h2>
                                 {aderezos && aderezos.map(aderezo => (
                                     <div key={aderezo.id}>
-                                        <label htmlFor={`aderezo-${aderezo.id}`}>{aderezo.nombre}</label>
+                                        <label htmlFor={aderezo.id}>{aderezo.nombre}</label>
                                         <input
                                             type="checkbox"
-                                            id={`aderezo-${aderezo.id}`}
+                                            id={aderezo.id}
                                             value={aderezo.id}
                                             name={aderezo.nombre}
                                             defaultChecked={
@@ -136,12 +158,12 @@ const EditarProducto = () => {
 
                                 <h2>Adicionales Predeterminados</h2>
                                 {adicionales && adicionales.map(adicional => (
-                                    <div>
-                                        <label key={adicional.id}>{adicional.nombre}</label>
+                                    <div key={adicional.id}>
+                                        <label >{adicional.nombre}</label>
                                         <input
                                             type="checkbox"
                                             value={adicional.id}
-                                            id={`adicional-${adicional.id}`}
+                                            id={adicional.id}
                                             name={adicional.nombre}
                                             defaultChecked={
                                                 producto?.adicionalesPredeterminados?.some((item) => item.id === adicional.id)

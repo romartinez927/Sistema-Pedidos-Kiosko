@@ -7,7 +7,7 @@ const EditarAderezo = () => {
     let { aderezoId } = useParams();
     const [aderezo, setAderezo] = useState({
         nombre: '',
-        estado: false,
+        estado: true,
     });
     const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {

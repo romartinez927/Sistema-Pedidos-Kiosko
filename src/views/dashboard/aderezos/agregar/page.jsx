@@ -6,6 +6,7 @@ function AltaAderezo() {
     const [aderezo, setAderezo] = useState({
         nombre: '',
         estado: false,
+        precio: ''
     });
 
     const handleChange = (e) => {
@@ -40,6 +41,17 @@ function AltaAderezo() {
                             id="nombre"
                             name="nombre"
                             value={aderezo.nombre}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="precio">Precio:</label>
+                        <input
+                            type="text"
+                            id="precio"
+                            name="precio"
+                            value={aderezo.precio}
                             onChange={handleChange}
                             required
                         />

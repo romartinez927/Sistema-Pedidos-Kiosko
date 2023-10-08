@@ -8,36 +8,44 @@ import "./PedidosContainer.css"
 function PedidosContainer() {
   // const socket = io.connect('https://sistema-pedidos.onrender.com')
   const [pedidos, setPedidos] = useState([]);
-  const [filtroEstado, setFiltroEstado] = useState('todos'); // 'todos' es el valor inicial
-
+  const [filtroEstado, setFiltroEstado] = useState('todos');
+  const [fechaSeleccionada, setFechaSeleccionada] = useState(new Date());
+  const [isLoading, setIsLoading] = useState(true)
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await getPedidos()
-        setPedidos(data)
-        // socket.on("enviar_prueba", async () => {
-        //   const dataSocket = await getPedidos()
-        //   setPedidos(dataSocket)
-        // })
+        const data = await getPedidos();
+        setPedidos(data);
       } catch (error) {
         console.error('Error fetching data:', error);
+      } finally {
+        setIsLoading(false)
       }
     }
-    fetchData()
-  }, []);
-// }, [socket]);
-
+    fetchData();
+  }, []); // Aquí puedes especificar las dependencias si es necesario
 
   const pedidosFiltrados = pedidos.filter(pedido => {
-    if (filtroEstado === 'todos') {
-      return true;
-    } else {
-      return pedido.estado === filtroEstado;
-    }
+    const fechaPedido = new Date(pedido.createdAt);
+
+    const esMismoDia = fechaPedido.toISOString().split('T')[0] === fechaSeleccionada.toISOString().split('T')[0];
+
+    const estadoCumple = (filtroEstado === 'todos') || (pedido.estado === filtroEstado);
+
+    return esMismoDia && estadoCumple;
   });
+
   return (
     <main>
       {/* LISTADO DE PEDIDOS */}
+      <div className='my-4 d-flex justify-content-center'>
+        <input
+          className="form-control input-date"
+          type="date"
+          value={fechaSeleccionada.toISOString().split('T')[0]}
+          onChange={(e) => setFechaSeleccionada(new Date(e.target.value))}
+        />
+      </div>
       <div className="d-flex justify-content-center gap-3 mt-4">
         <ul className="nav nav-pills nav-fill">
           <li className="nav-item">
@@ -54,19 +62,59 @@ function PedidosContainer() {
           </li>
         </ul>
       </div>
-      <div className="container-fluid">
-        <div className='d-flex justify-content-center flex-wrap'>
+
+      <div className="content">
+        <div className="container mt-3">
+          <div className="table-responsive">
+            <table className="table custom-table">
+              <thead>
+                {
+                  pedidosFiltrados.length > 0 && isLoading == false &&
+                  <tr className='text-center'>
+                    <th scope="col">Título</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Nota</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Fecha y hora</th>
+                  </tr>
+                }
+              </thead>
+              <tbody>
+                {
+                  isLoading ?
+                  <tr className='text-center'>
+                    <td>
+                      <div class="spinner-border " role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                    </td>
+                  </tr>
+                    :
+
+                    pedidosFiltrados.map((pedido, index) => (
+                      <PedidoList
+                        key={index}
+                        pedido={pedido}
+                      />
+                    ))
+
+                }
+
+
+              </tbody>
+            </table>
+
+          </div>
           {
-            pedidosFiltrados.map((pedido, index) => (
-              <PedidoList
-                key={index}
-                pedido={pedido}
-                // socket={socket}
-              />
-            ))
+            pedidosFiltrados == 0 && isLoading == false &&
+            <div className='text-center'>
+              <h5>No se encontraron pedidos...</h5>
+            </div>
           }
         </div>
       </div>
+
+
     </main>
   )
 }

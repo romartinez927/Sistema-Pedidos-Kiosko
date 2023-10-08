@@ -7,9 +7,11 @@ const EditarAdicional = () => {
     let { adicionalId } = useParams();
     const [adicional, setAdicional] = useState({
         nombre: '',
-        estado: false,
+        precio: '',
+        estado: true,
     });
     const [isLoading, setIsLoading] = useState(true)
+
     useEffect(() => {
         async function fetchAdicional() {
             try {
@@ -41,6 +43,9 @@ const EditarAdicional = () => {
         }
     };
 
+
+    console.log(adicional)
+
     return (
         <main>
             <h1 className='text-center'>Editar adicional</h1>
@@ -56,6 +61,17 @@ const EditarAdicional = () => {
                                         id="nombre"
                                         name="nombre"
                                         value={adicional?.nombre}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="precio">Precio:</label>
+                                    <input
+                                        type="number"
+                                        id="precio"
+                                        name="precio"
+                                        value={adicional?.precio}
                                         onChange={handleChange}
                                         required
                                     />

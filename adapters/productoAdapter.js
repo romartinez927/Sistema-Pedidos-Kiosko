@@ -6,6 +6,7 @@ export const adaptarProductoParaWeb = (apiData) => ({
     estado: apiData.estado,
     adicionalesPredeterminados: apiData.adicionalesPredeterminados,
     aderezosPredeterminados: apiData.aderezosPredeterminados,
+    precio: apiData.precio,
 });
 
 export const adaptarProductoParaApi = (appData) => ({
@@ -14,4 +15,5 @@ export const adaptarProductoParaApi = (appData) => ({
     aderezosPredeterminados: appData.aderezosPredeterminados,
     adicionalesPredeterminados: appData.adicionalesPredeterminados,
     estado: appData.estado,
+    precio: appData.precio,
 });

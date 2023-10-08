@@ -5,6 +5,7 @@ function AltaAdicional() {
     const [adicional, setAdicional] = useState({
         nombre: '',
         estado: false,
+        precio: ''
     });
 
     const handleChange = (e) => {
@@ -36,6 +37,17 @@ function AltaAdicional() {
                             id="nombre"
                             name="nombre"
                             value={adicional.nombre}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="precio">Precio:</label>
+                        <input
+                            type="number"
+                            id="precio"
+                            name="precio"
+                            value={adicional.precio}
                             onChange={handleChange}
                             required
                         />

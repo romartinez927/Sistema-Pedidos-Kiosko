@@ -11,6 +11,7 @@ function AltaProducto() {
     const [formData, setFormData] = useState({
         nombre: '',
         estado: true,
+        precio: '',
         adicionalesPredeterminados: arrayAdicionales,
         aderezosPredeterminados: arrayAderezos
     });
@@ -80,6 +81,17 @@ function AltaProducto() {
                             id="nombre"
                             name="nombre"
                             value={formData.nombre}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="precio">Precio:</label>
+                        <input
+                            type="number"
+                            id="precio"
+                            name="precio"
+                            value={formData.precio}
                             onChange={handleChange}
                             required
                         />
